@@ -5,8 +5,11 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
-print(os.getenv('DATABASE_URL'))
-database_path = os.getenv('DATABASE_URL')
+# print(os.getenv('DATABASE_URL'))
+# database_path = os.getenv('DATABASE_URL')
+
+# HEROKU POSTGRES SETUP
+database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
