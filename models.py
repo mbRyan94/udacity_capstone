@@ -21,6 +21,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    # db.drop_all()
     db.create_all()
 
 
@@ -46,3 +47,7 @@ class Person(db.Model):
             'id': self.id,
             'name': self.name,
             'catchphrase': self.catchphrase}
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
