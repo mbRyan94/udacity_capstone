@@ -37,15 +37,23 @@ def create_app(test_config=None):
     @app.route('/api/db', methods=['POST'])
     def db_test():
         try:
-            data = request.get_json()
-
-            print(data)
+            req_data = request.get_json()
+            name = req_data['name']
+            catchphrase = req_data['catchphrase']
+            print(req_data)
             new_person = Person(
-                name="Pipsii", catchphrase="This is the catchphrase")
+                name=name, catchphrase=catchphrase)
             Person.insert(new_person)
             persons = Person.query.all()
-            print(persons)
-            return jsonify({"new_person": "works"})
+            res_names = []
+            for person in persons:
+                # print('person: ', person)
+                res_names.append({
+                    "name": person.name,
+                    "catchphrase": person.catchphrase
+                })
+            # print(res)
+            return jsonify({"new_person": res_names})
         except Exception:
             print(sys.exc_info())
             return jsonify({"new_person": "did not work"})
