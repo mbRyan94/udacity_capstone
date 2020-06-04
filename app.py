@@ -11,8 +11,11 @@ load_dotenv()
 def create_app(test_config=None):
 
     app = Flask(__name__)
+
     heroku = Heroku(app)
-    # setup_db(app)
+    setup_db(app)
+    app.config["SQLALCHEMY_DATABASE_URI"]
+
     CORS(app)
 
     @app.route('/')
