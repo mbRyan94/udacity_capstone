@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify, request
+from flask_heroku import Heroku
 from models import setup_db, Person
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ load_dotenv()
 def create_app(test_config=None):
 
     app = Flask(__name__)
+    heroku = Heroku(app)
     setup_db(app)
     CORS(app)
 
