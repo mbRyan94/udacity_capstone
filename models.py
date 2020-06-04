@@ -59,3 +59,18 @@ class Person(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
+
+
+class Dog(db.Model):
+    __tablename__ = 'Dog'
+    id = Column(db.Integer, primary_key=True)
+    name = Column(db.String)
+    catchphrase = Column(db.String)
+
+    def __init__(self, name, catchphrase=""):
+        self.name = name
+        self.catchphrase = catchphrase
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
