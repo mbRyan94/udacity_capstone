@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 from flask_heroku import Heroku
-from models import setup_db, Person
+from models import setup_db, Person, Dog
 from flask_cors import CORS
 from dotenv import load_dotenv
 import sys
@@ -34,8 +34,8 @@ def create_app(test_config=None):
     def api_test():
         return jsonify({"msg": "API is working!"})
 
-    @app.route('/api/db', methods=['POST'])
-    def db_test():
+    @app.route('/api/persons', methods=['POST'])
+    def db_add_person():
         try:
             req_data = request.get_json()
             name = req_data['name']
@@ -57,6 +57,30 @@ def create_app(test_config=None):
         except Exception:
             print(sys.exc_info())
             return jsonify({"new_person": "did not work"})
+
+    @app.route('/api/dogs', methods=['POST'])
+    def db_add_dog():
+        try:
+            req_data = request.get_json()
+            name = req_data['name']
+            catchphrase = req_data['catchphrase']
+            print(req_data)
+            new_dog = Dog(
+                name=name, catchphrase=catchphrase)
+            Dog.insert(new_dog)
+            dogs = Dog.query.all()
+            res_names = []
+            for dog in dogs:
+                # print('person: ', person)
+                res_names.append({
+                    "name": dog.name,
+                    "catchphrase": dog.catchphrase
+                })
+            # print(res)
+            return jsonify({"new_dog": res_names})
+        except Exception:
+            print(sys.exc_info())
+            return jsonify({"new_dog": "did not work"})
 
     return app
 
