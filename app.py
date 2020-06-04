@@ -12,7 +12,7 @@ def create_app(test_config=None):
 
     app = Flask(__name__)
     heroku = Heroku(app)
-    setup_db(app)
+    # setup_db(app)
     CORS(app)
 
     @app.route('/')
