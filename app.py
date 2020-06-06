@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 from flask_heroku import Heroku
-from models import setup_db, Person, Dog
+from models import setup_db, Person, User
 from flask_cors import CORS
 from dotenv import load_dotenv
 import sys
@@ -38,6 +38,7 @@ def create_app(test_config=None):
     def db_add_person():
         try:
             req_data = request.get_json()
+            print(req_data)
             name = req_data['name']
             catchphrase = req_data['catchphrase']
             print(req_data)
@@ -58,29 +59,30 @@ def create_app(test_config=None):
             print(sys.exc_info())
             return jsonify({"new_person": "did not work"})
 
-    @app.route('/api/dogs', methods=['POST'])
-    def db_add_dog():
+    @app.route('/api/users', methods=['POST'])
+    def add_user():
         try:
             req_data = request.get_json()
-            name = req_data['name']
-            catchphrase = req_data['catchphrase']
             print(req_data)
-            new_dog = Dog(
-                name=name, catchphrase=catchphrase)
-            Dog.insert(new_dog)
-            dogs = Dog.query.all()
+            name = req_data['name']
+            email = req_data['email']
+
+            new_user = User(
+                name=name, email=email)
+            User.insert(new_user)
+            users = User.query.all()
             res_names = []
-            for dog in dogs:
+            for user in users:
                 # print('person: ', person)
                 res_names.append({
-                    "name": dog.name,
-                    "catchphrase": dog.catchphrase
+                    "name": user.name,
+                    "email": user.email
                 })
             # print(res)
-            return jsonify({"new_dog": res_names})
+            return jsonify({"new_user": res_names})
         except Exception:
             print(sys.exc_info())
-            return jsonify({"new_dog": "did not work"})
+            return jsonify({"new_user": "did not work"})
 
     return app
 

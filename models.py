@@ -61,15 +61,15 @@ class Person(db.Model):
         db.session.commit()
 
 
-class Dog(db.Model):
-    __tablename__ = 'Dog'
+class User(db.Model):
+    __tablename__ = 'User'
     id = Column(db.Integer, primary_key=True)
     name = Column(db.String)
-    catchphrase = Column(db.String)
+    email = Column(db.String)
 
-    def __init__(self, name, catchphrase=""):
+    def __init__(self, name, email=""):
         self.name = name
-        self.catchphrase = catchphrase
+        self.email = email
 
     def insert(self):
         db.session.add(self)
