@@ -80,10 +80,11 @@ class Workspace(db.Model):
         'project.id'), nullable=False)
     workitems = db.relationship('Workitem', backref='workspace', lazy=True)
 
-    def __init__(self, name, description="", price=0.0):
+    def __init__(self, name, description="", price=0.0, project_id=None):
         self.name = name
         self.description = description
         self.price = price
+        self.project_id = project_id
 
     def insert(self):
         db.session.add(self)
@@ -99,10 +100,11 @@ class Workitem(db.Model):
     workspace_id = db.Column(db.Integer, db.ForeignKey(
         'workspace.id'), nullable=False)
 
-    def __init__(self, name, description="", duration=0.0):
+    def __init__(self, name, description="", duration=0.0, workspace_id=None):
         self.name = name
         self.description = description
         self.duration = duration
+        self.workspace_id = workspace_id
 
     def insert(self):
         db.session.add(self)
