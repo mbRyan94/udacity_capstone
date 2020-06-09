@@ -55,7 +55,9 @@ def create_app(test_config=None):
                 # print('person: ', person)
                 res.append({
                     "name": project.name,
-                    "description": project.description
+                    "description": project.description,
+                    "start_date": project.start_date,
+                    "end_date": project.end_date
                 })
             # print(res)
             return jsonify({"new_project": res})
