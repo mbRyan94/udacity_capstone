@@ -45,6 +45,34 @@ def get_token_auth_header():
 
 
 # check_permission(permission, payload)
+'''
+@TODO implement check_permissions(permission, payload) method
+    @INPUTS
+        permission: string permission (i.e. 'post:drink')
+        payload: decoded jwt payload
+
+    it should raise an AuthError if permissions are not included in the payload
+        !!NOTE check your RBAC settings in Auth0
+    it should raise an AuthError if the requested permission string is not in
+    the payload permissions array
+    return true otherwise
+'''
+
+
+def check_permissions(permission, payload):
+    if 'permissions' not in payload:
+        raise AuthError({
+            'status': 'payload_without_permissions',
+            'description': 'the payload does not have any permission attributes'
+        })
+
+    if permission not in payload['permissions']:
+        raise AuthError({
+            'status': 'invalid_permissions',
+            'description': 'invalid permissions'
+        })
+
+    return True
 
 
 # verify_decoded_jwt(token)
@@ -52,7 +80,7 @@ def verify_decoded_jwt(token):
     rsa_keys = {}
     try:
         JWKS_file = urlopen(
-            'https://{}/.well-known/jwks.json'.format(AUTH_DOMAIN))
+            f'https://{AUTH_DOMAIN}/.well-known/jwks.json')
     except Exception:
         print(sys.exc_info())
 
@@ -97,6 +125,7 @@ def verify_decoded_jwt(token):
 
         print('payload: ', payload)
         return payload
+
     except jwt.JWTError:
         raise AuthError({
             'status': 'invalid_signature',
@@ -114,4 +143,29 @@ def verify_decoded_jwt(token):
         }, 401)
 
 
+'''
+@TODO implement @requires_auth(permission) decorator method
+    @INPUTS
+        permission: string permission (i.e. 'post:drink')
+
+    it should use the get_token_auth_header method to get the token
+    it should use the verify_decode_jwt method to decode the jwt
+    it should use the check_permissions method validate claims
+    and check the requested permission
+    return the decorator which passes the decoded payload
+    to the decorated method
+'''
+
 # require_auth wrapper
+
+
+def require_auth(permission=""):
+    def auth_decorator_function(func):
+        @wraps(func)
+        def func_wrapper(*args, **kwargs):
+            token = get_token_auth_header()
+            payload = verify_decoded_jwt(token)
+            check_permissions(permission, payload)
+            return func(payload, *args, **kwargs)
+        return func_wrapper
+    return auth_decorator_function
