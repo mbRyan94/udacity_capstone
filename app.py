@@ -37,10 +37,6 @@ def create_app(test_config=None):
     @require_auth('get:workspaces')
     def api_test(jwt_payload):
         try:
-            # jwt = auth.get_token_auth_header()
-            # payload = auth.verify_decoded_jwt(jwt)
-            # print(payload)
-            # hasPermissions = auth.check_permissions('get:workspaces', payload)
             return jsonify({"msg": jwt_payload})
         except Exception:
             print(sys.exc_info())
