@@ -1,11 +1,13 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 import datetime
 from flask_heroku import Heroku
 from models import setup_db, Project, Workspace, Workitem, User
 from flask_cors import CORS
 from dotenv import load_dotenv
 import sys
+from authentication.auth import require_auth
+
 load_dotenv()
 
 
@@ -32,8 +34,17 @@ def create_app(test_config=None):
         return "Be cool, man, be coooool! You're almost a FSND grad!"
 
     @app.route('/api/test')
-    def api_test():
-        return jsonify({"msg": "API is working!"})
+    @require_auth('get:workspaces')
+    def api_test(jwt_payload):
+        try:
+            # jwt = auth.get_token_auth_header()
+            # payload = auth.verify_decoded_jwt(jwt)
+            # print(payload)
+            # hasPermissions = auth.check_permissions('get:workspaces', payload)
+            return jsonify({"msg": jwt_payload})
+        except Exception:
+            print(sys.exc_info())
+            abort(401)
 
     @app.route('/api/projects', methods=['POST'])
     def db_add_person():
