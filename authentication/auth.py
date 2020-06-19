@@ -5,8 +5,8 @@ from jose import jwt
 from urllib.request import urlopen
 import sys
 
-AUTH_DOMAIN = 'fsnd2020.eu.auth0.com'
-ALGORITHM = ['RSA256']
+AUTH_DOMAIN = 'https://fsnd2020.eu.auth0.com/'
+ALGORITHM = ['RS256']
 API_AUDIENCE = 'freetime'
 
 # AuthError Exception
@@ -27,17 +27,19 @@ def get_token_auth_header():
             raise AuthError({
                 'status': 'no_authentication_header',
                 'description': 'missing authentication header'
-            }, 403)
-        bearer_token = auth_header.split(' ').lower()
+            }, 401)
+        bearer_token = auth_header.split(' ')
         print('bearer_token: ', bearer_token)
-        if bearer_token[0] == 'bearer' and bearer_token.len() != 2:
+        if bearer_token[0].lower() == 'bearer' and len(bearer_token) == 2:
             token = bearer_token[1]
+            print('token: ', token)
+            return token
         else:
             raise AuthError(
                 {
                     'status': 'malformed_header',
                     'description': 'malformed header included'
-                }, 403)
+                }, 401)
         return token
     except Exception:
         print(sys.exc_info())
@@ -64,13 +66,13 @@ def check_permissions(permission, payload):
         raise AuthError({
             'status': 'payload_without_permissions',
             'description': 'the payload does not have any permission attributes'
-        })
+        }, 401)
 
     if permission not in payload['permissions']:
         raise AuthError({
             'status': 'invalid_permissions',
             'description': 'invalid permissions'
-        })
+        }, 401)
 
     return True
 
@@ -80,7 +82,7 @@ def verify_decoded_jwt(token):
     rsa_keys = {}
     try:
         JWKS_file = urlopen(
-            f'https://{AUTH_DOMAIN}/.well-known/jwks.json')
+            f'{AUTH_DOMAIN}.well-known/jwks.json')
     except Exception:
         print(sys.exc_info())
 
@@ -110,9 +112,12 @@ def verify_decoded_jwt(token):
             'description': 'token header is invalid'
         }, 401)
 
-    for key in jwks['keys'][0]:
+    for key in jwks['keys']:
+        # print('key: ', key)
+        if (rsa_keys):
+            break
         rsa_keys = {
-            "kid": key['kid'],
+            "kty": key['kty'],
             "use": key['use'],
             "n": key['n'],
             "e": key['e']
@@ -127,6 +132,7 @@ def verify_decoded_jwt(token):
         return payload
 
     except jwt.JWTError:
+        print(sys.exc_info())
         raise AuthError({
             'status': 'invalid_signature',
             'description': 'invalid signature for decoding the token'
