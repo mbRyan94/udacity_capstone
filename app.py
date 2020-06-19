@@ -43,7 +43,7 @@ def create_app(test_config=None):
             abort(401)
 
     @app.route('/api/projects', methods=['POST'])
-    def db_add_person():
+    def add_project():
         try:
             req_data = request.get_json()
             print(req_data)
@@ -59,7 +59,7 @@ def create_app(test_config=None):
             projects = Project.query.all()
             res = []
             for project in projects:
-                # print('person: ', person)
+
                 res.append({
                     "name": project.name,
                     "description": project.description,
@@ -73,7 +73,7 @@ def create_app(test_config=None):
             return jsonify({"new_person": "did not work"})
 
     @app.route('/api/workspaces', methods=['POST'])
-    def db_add_workspaces():
+    def add_workspaces():
         try:
             req_data = request.get_json()
             print(req_data)
@@ -89,7 +89,7 @@ def create_app(test_config=None):
             workspaces = Workspace.query.all()
             res = []
             for workspace in workspaces:
-                # print('person: ', person)
+
                 res.append({
                     "name": workspace.name,
                     "description": workspace.description,
@@ -103,7 +103,7 @@ def create_app(test_config=None):
             return jsonify({"new_workspace": "did not work"})
 
     @app.route('/api/workitems', methods=['POST'])
-    def db_add_workitem():
+    def add_workitem():
         try:
             req_data = request.get_json()
             print(req_data)
@@ -119,7 +119,7 @@ def create_app(test_config=None):
             workitems = Workitem.query.all()
             res = []
             for workitem in workitems:
-                # print('person: ', person)
+
                 res.append({
                     "name": workitem.name,
                     "description": workitem.description,
@@ -146,7 +146,7 @@ def create_app(test_config=None):
             users = User.query.all()
             res_names = []
             for user in users:
-                # print('person: ', person)
+
                 res_names.append({
                     "name": user.name,
                     "email": user.email

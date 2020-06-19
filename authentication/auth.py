@@ -22,17 +22,17 @@ class AuthError(Exception):
 def get_token_auth_header():
     try:
         auth_header = request.headers.get('Authorization')
-        print('auth_header: ', auth_header)
+        # print('auth_header: ', auth_header)
         if not auth_header:
             raise AuthError({
                 'status': 'no_authentication_header',
                 'description': 'missing authentication header'
             }, 401)
         bearer_token = auth_header.split(' ')
-        print('bearer_token: ', bearer_token)
+        # print('bearer_token: ', bearer_token)
         if bearer_token[0].lower() == 'bearer' and len(bearer_token) == 2:
             token = bearer_token[1]
-            print('token: ', token)
+            # print('token: ', token)
             return token
         else:
             raise AuthError(
@@ -77,7 +77,6 @@ def check_permissions(permission, payload):
     return True
 
 
-# verify_decoded_jwt(token)
 def verify_decoded_jwt(token):
     rsa_keys = {}
     try:
@@ -87,7 +86,6 @@ def verify_decoded_jwt(token):
         print(sys.exc_info())
 
     jwks = json.loads(JWKS_file.read())
-    print('jwks: ', jwks)
 
     jwks_kid = jwks['keys'][0]['kid']
     print('jwks keyId: ', jwks_kid)
@@ -113,7 +111,6 @@ def verify_decoded_jwt(token):
         }, 401)
 
     for key in jwks['keys']:
-        # print('key: ', key)
         if (rsa_keys):
             break
         rsa_keys = {
@@ -132,7 +129,6 @@ def verify_decoded_jwt(token):
         return payload
 
     except jwt.JWTError:
-        print(sys.exc_info())
         raise AuthError({
             'status': 'invalid_signature',
             'description': 'invalid signature for decoding the token'
@@ -161,8 +157,6 @@ def verify_decoded_jwt(token):
     return the decorator which passes the decoded payload
     to the decorated method
 '''
-
-# require_auth wrapper
 
 
 def require_auth(permission=""):
