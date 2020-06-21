@@ -4,10 +4,12 @@ import sys
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.db.models import Project
+from src.authentication.auth import require_auth, AuthError
 
 
 class Projects(Resource):
-    def get(self):
+    @require_auth('get:projects')
+    def get(self, jwt_payload):
         projects = []
         try:
             projects_from_db = Project.query.all()
