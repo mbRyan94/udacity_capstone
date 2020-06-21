@@ -2,11 +2,15 @@ import os
 from flask import Flask, jsonify, request, abort
 import datetime
 from flask_heroku import Heroku
-from models import setup_db, Project, Workspace, Workitem, User
 from flask_cors import CORS
+from flask_restful import Api
 from dotenv import load_dotenv
 import sys
-from authentication.auth import require_auth
+from urllib.error import HTTPError
+
+from src.db.models import setup_db, Project, Workspace, Workitem, User
+from src.authentication.auth import require_auth, AuthError
+from src.api.routes import initialize_routes
 
 load_dotenv()
 
@@ -14,10 +18,11 @@ load_dotenv()
 def create_app(test_config=None):
 
     app = Flask(__name__)
-
+    api = Api(app)
     heroku = Heroku(app)
     setup_db(app)
     app.config["SQLALCHEMY_DATABASE_URI"]
+    initialize_routes(api)
 
     CORS(app)
 
@@ -38,12 +43,14 @@ def create_app(test_config=None):
     def api_test(jwt_payload):
         try:
             return jsonify({"msg": jwt_payload})
+
         except Exception:
             print(sys.exc_info())
-            abort(401)
+            abort(404)
 
     @app.route('/api/projects', methods=['POST'])
-    def add_project():
+    @require_auth('post:projects')
+    def add_project(jwt_payload):
         try:
             req_data = request.get_json()
             print(req_data)
@@ -71,6 +78,34 @@ def create_app(test_config=None):
         except Exception:
             print(sys.exc_info())
             return jsonify({"new_person": "did not work"})
+
+    # @app.route('/api/projects')
+    # @require_auth('get:projects')
+    # def get_all_projects(jwt_payload):
+    #     try:
+    #         projects_from_db = Project.query.all()
+    #         print('projects', projects_from_db)
+    #     except Exception:
+    #         print(sys.exc_info())
+    #         return jsonify({
+    #             'success': False
+    #         })
+    #         projects = []
+    #         for project in projects_from_db:
+    #             projects.append(
+    #                 {
+    #                     id: project.id,
+    #                     name: project.name,
+    #                     description: project.description,
+    #                     start_date: project.start_date,
+    #                     end_date: project.end_date,
+    #                     workspaces: [project.workspaces]
+    #                 }
+    #             )
+    #         return jsonify({
+    #             'success': True,
+    #             'projects': projects
+    #         })
 
     @app.route('/api/workspaces', methods=['POST'])
     def add_workspaces():
@@ -156,6 +191,51 @@ def create_app(test_config=None):
         except Exception:
             print(sys.exc_info())
             return jsonify({"new_user": "did not work"})
+
+    # Error Handling
+
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'error': 400,
+            'message': 'bad request'
+        }), 400
+
+    @app.errorhandler(404)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'error': 404,
+            'message': 'resource not found'
+        }), 400
+
+    @app.errorhandler(401)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'error': 401,
+            'message': 'unauthorized'
+        }), 401
+
+    @app.errorhandler(500)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'error': 500,
+            'message': 'SERVER ERROR'
+        }), 500
+
+    @app.errorhandler(AuthError)
+    def authentication_error(error):
+        print(error)
+        error_status_code = error.status_code
+        error_description = error.error['description']
+        return jsonify({
+            'success': False,
+            'error': error_status_code,
+            'message': error_description
+        })
 
     return app
 
