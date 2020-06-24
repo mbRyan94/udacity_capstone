@@ -82,7 +82,8 @@ class Workspace(db.Model):
     price = Column(db.Float)
     project_id = db.Column(db.Integer, db.ForeignKey(
         'project.id'), nullable=False)
-    workitems = db.relationship('Workitem', backref='workspace', lazy=True)
+    workitems = db.relationship(
+        'Workitem', cascade='all, delete-orphan', backref='workspace', lazy=True)
 
     def __init__(self, name, description="", price=0.0, project_id=None):
         self.name = name
