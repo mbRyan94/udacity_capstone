@@ -116,16 +116,6 @@ class Workitem(db.Model):
         db.session.commit()
 
 
-class User(db.Model):
-    __tablename__ = 'user'
+class Test(db.Model):
     id = Column(db.Integer, primary_key=True)
     name = Column(db.String)
-    email = Column(db.String)
-
-    def __init__(self, name, email=""):
-        self.name = name
-        self.email = email
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
