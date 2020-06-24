@@ -48,13 +48,16 @@ class Project(db.Model):
     description = Column(db.String)
     start_date = Column(DateTime, default=datetime.datetime.now)
     end_date = Column(DateTime)
-    workspaces = db.relationship('Workspace', backref='project')
+    user_id = Column(db.String, nullable=False)
+    workspaces = db.relationship(
+        'Workspace', cascade='all, delete-orphan', backref='project')
 
-    def __init__(self, name, description="", start_date=None, end_date=None):
+    def __init__(self, name, description="", start_date=None, end_date=None, user_id=""):
         self.name = name
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
+        self.user_id = user_id
 
     def format(self):
         return {
@@ -62,7 +65,8 @@ class Project(db.Model):
             'name': self.name,
             'description': self.description,
             'start_date': self.start_date,
-            'end_date': self.end_date
+            'end_date': self.end_date,
+            'user_id': self.user_id
         }
 
     def insert(self):
