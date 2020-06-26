@@ -52,7 +52,7 @@ class Project(db.Model):
     workspaces = db.relationship(
         'Workspace', cascade='all, delete-orphan', backref='project')
 
-    def __init__(self, name, description="", start_date=None, end_date=None, user_id=""):
+    def __init__(self, name, description="", start_date=None, end_date=None, user_id=None):
         self.name = name
         self.description = description
         self.start_date = start_date
@@ -71,6 +71,10 @@ class Project(db.Model):
 
     def insert(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
 
@@ -95,6 +99,10 @@ class Workspace(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 
 class Workitem(db.Model):
     __tablename__ = 'workitem'
@@ -113,6 +121,10 @@ class Workitem(db.Model):
 
     def insert(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
 
