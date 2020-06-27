@@ -9,11 +9,20 @@ from src.authentication.auth import require_auth, AuthError
 
 
 class Project(Resource):
-    # @require_auth('get:project')
-    def get(self, project_id):
+    decorators = [require_auth('get:project')]
+
+    def get(self, jwt_payload, project_id):
         try:
+            print('jwt: ', jwt_payload)
             project = db_Project.query.filter(
                 db_Project.id == project_id).first()
+            if not project:
+                return {
+                    'success': False,
+                    'error': 404,
+                    'message': 'resource not found'
+                }
+
             print(project.format())
             return jsonify({
                 'success': True,
@@ -22,4 +31,4 @@ class Project(Resource):
 
         except Exception:
             print(sys.exc_info())
-            abort(404)
+            abort(500)
