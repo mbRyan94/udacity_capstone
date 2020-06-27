@@ -11,11 +11,17 @@ import src.db.query as db
 
 
 class Projects(Resource):
-    @require_auth('get:projects')
+    decorators = [require_auth('get:projects')]
+    # @require_auth('get:projects')
+
     def get(self, jwt_payload):
         projects = []
         try:
-            projects_from_db = db.get_all_projects()
+            jwt_subject = jwt_payload['sub']
+            print('user_id: ', jwt_subject.split('|')[1])
+            user_id = jwt_subject.split('|')[1]
+
+            projects_from_db = db.get_all_projects_by_user_id(user_id)
         except SQLAlchemyError:
             print(sys.exc_info())
             abort(404)
