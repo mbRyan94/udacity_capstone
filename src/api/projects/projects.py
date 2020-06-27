@@ -1,11 +1,13 @@
 from flask import request, abort, jsonify
 from flask_restful import Resource
 import sys
-import datetime
+import json
+from datetime import datetime, timedelta
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.db.models import Project
 from src.authentication.auth import require_auth, AuthError
+import src.db.query as db
 
 
 class Projects(Resource):
@@ -13,7 +15,7 @@ class Projects(Resource):
     def get(self, jwt_payload):
         projects = []
         try:
-            projects_from_db = Project.query.all()
+            projects_from_db = db.get_all_projects()
         except SQLAlchemyError:
             print(sys.exc_info())
             abort(404)
@@ -25,6 +27,7 @@ class Projects(Resource):
                 'description': project.description,
                 'start_date': project.start_date,
                 'end_date': project.end_date,
+                'user_id': project.user_id
 
             })
         return jsonify(projects)
@@ -34,13 +37,22 @@ class Projects(Resource):
         try:
             req_data = request.get_json()
             print(req_data)
+            if not req_data:
+                return {
+                    'success': False,
+                    'error': 400,
+                    'message': 'bad request'
+                }
             name = req_data['name']
             description = req_data['description']
-            start_date = datetime.datetime.now()
-            end_date = start_date
+            start_date = datetime.now().date()
+            print('start_date: ', start_date)
+            end_date = start_date + timedelta(days=14)
+
+            user_id = req_data['user_id']
 
             new_project = Project(
-                name=name, description=description, start_date=start_date, end_date=end_date)
+                name=name, description=description, start_date=start_date, end_date=end_date, user_id=user_id)
             Project.insert(new_project)
             projects = Project.query.all()
             res = []
@@ -49,11 +61,16 @@ class Projects(Resource):
                 res.append({
                     "name": project.name,
                     "description": project.description,
-                    "start_date": project.start_date,
-                    "end_date": project.end_date
+                    "start_date": json.dumps(project.start_date, indent=4, sort_keys=True, default=str),
+                    "end_date": json.dumps(project.end_date, indent=4, sort_keys=True, default=str),
+                    "user_id": project.user_id
                 })
-            # print(res)
-            return jsonify({"new_project": res})
+
+            return {"projects": res}
         except Exception:
             print(sys.exc_info())
-            return jsonify({"new_person": "did not work"})
+            return {
+                'success': False,
+                'error': 500,
+                'message': 'SERVER ERROR'
+            }
