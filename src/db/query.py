@@ -1,4 +1,5 @@
 from src.db.models import Project, Workspace, Workitem
+from sqlalchemy import and_
 
 
 def get_workitems_by_workspace_id(workspace_id):
@@ -15,3 +16,7 @@ def get_workspaces_by_project_id(project_id):
 
 def get_all_projects_by_user_id(user_id):
     return Project.query.filter(Project.user_id == user_id).all()
+
+
+def get_project_by_id_and_user(user_id, project_id):
+    return Project.query.filter(and_(user_id == Project.user_id, project_id == Project.id)).one_or_none()
