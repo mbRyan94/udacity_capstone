@@ -4,19 +4,23 @@ import sys
 import datetime
 from sqlalchemy.exc import SQLAlchemyError
 
+import src.db.query as db
 from src.db.models import Project as db_Project
-from src.authentication.auth import require_auth, AuthError
+from src.authentication.auth import require_auth, AuthError, get_token_user_id
 
 
 class Project(Resource):
-    decorators = [require_auth('get:project')]
+    method_decorators = [require_auth('get:project')]
 
     def get(self, jwt_payload, project_id):
         try:
-            print('jwt: ', jwt_payload)
-            project = db_Project.query.filter(
-                db_Project.id == project_id).first()
+            print('project_id: ', project_id)
+            user_id = jwt_payload['sub'].split('|')[1]
+
+            project = db.get_project_by_id_and_user(
+                user_id, project_id)
             if not project:
+                print(sys.exc_info())
                 return {
                     'success': False,
                     'error': 404,
@@ -29,6 +33,43 @@ class Project(Resource):
                 'project': project.format()
             })
 
+        except Exception:
+            print(sys.exc_info())
+            abort(500)
+
+    method_decorators = [require_auth('delete:project')]
+
+    def delete(self, jwt_payload, project_id):
+        try:
+            user_id = get_token_user_id(jwt_payload)
+            project = db.get_project_by_id_and_user(
+                user_id, project_id)
+            if not project:
+                print(sys.exc_info())
+                return {
+                    'success': False,
+                    'error': 404,
+                    'message': 'resource not found'
+                }
+            delete = project.delete()
+            print(delete)
+            if not delete:
+                print(sys.exc_info())
+            updated_projects = db.get_all_projects_by_user_id(user_id)
+            res_data = []
+            for project in updated_projects:
+                res_data.append({
+                    'id': project.id,
+                    'name': project.name,
+                    'description': project.description,
+                    'user_id': project.user_id,
+                    'start_date': project.start_date,
+                    'end_date': project.end_date
+                })
+            return jsonify({
+                'success': True,
+                'projects': res_data
+            })
         except Exception:
             print(sys.exc_info())
             abort(500)
