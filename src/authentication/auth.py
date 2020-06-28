@@ -169,3 +169,14 @@ def require_auth(permission=""):
             return func(payload, *args, **kwargs)
         return func_wrapper
     return auth_decorator_function
+
+
+def get_token_user_id(jwt_payload):
+    subject = jwt_payload['sub']
+    if not subject:
+        return AuthError({
+            'status': 'token_without_subject',
+            'description': 'no user provided'
+        })
+    user_id = subject.split('|')[1]
+    return user_id
