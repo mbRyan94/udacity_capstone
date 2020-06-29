@@ -47,7 +47,10 @@ class Workspaces(Resource):
             new_workspace = db_Workspace(
                 name=name, description=description, price=price, project_id=project_id)
             db_Workspace.insert(new_workspace)
-            workspaces = db_Workspace.query.all()
+            # todo: query all user and project specific workspaces
+
+            workspaces = db.get_all_workspaces_by_project_and_user(
+                user_id, project_id)
             res = []
             for workspace in workspaces:
 
