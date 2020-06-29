@@ -27,10 +27,27 @@ class Project(Resource):
                     'message': 'resource not found'
                 }
 
+            project_workspaces = []
+            workspaces = db.get_all_workspaces_by_project_and_user(
+                user_id, project_id)
+            print('workspaces: ', workspaces)
+            if not workspaces:
+                print(sys.exc_info())
+                abort(404)
+
+            for workspace in workspaces:
+                project_workspaces.append({
+                    "name": workspace.name,
+                    "description": workspace.description,
+                    "price": workspace.price,
+                    "project_id": workspace.project_id
+                })
+
             print(project.format())
             return jsonify({
                 'success': True,
-                'project': project.format()
+                'project': project.format(),
+                'workspaces': project_workspaces
             })
 
         except Exception:
