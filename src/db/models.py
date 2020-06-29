@@ -103,6 +103,15 @@ class Workspace(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price,
+            'project_id': self.project_id
+        }
+
 
 class Workitem(db.Model):
     __tablename__ = 'workitem'
