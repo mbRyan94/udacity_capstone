@@ -29,16 +29,15 @@ class Workspaces(Resource):
 
     def post(self, jwt_payload, project_id):
         try:
-            print('proj_id: ', project_id)
+            # print('proj_id: ', project_id)
             user_id = get_token_user_id(jwt_payload)
             req_data = request.get_json()
             print(req_data)
             name = req_data['name']
             description = req_data['description']
             price = req_data['price']
-            project_id = req_data['project_id']
+            # project_id = req_data['project_id']
             print('project_id: ', project_id)
-            print(req_data)
             is_users_project = db.check_project_owner(user_id, project_id)
             if not is_users_project:
                 raise AuthError({
@@ -58,7 +57,6 @@ class Workspaces(Resource):
                     "price": workspace.price,
                     "project_id": workspace.project_id
                 })
-            # print(res)
             return jsonify({"workspaces": res})
         except AuthError:
             return {
