@@ -136,6 +136,18 @@ class Workitem(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def update(self):
+        db.session.commit()
+
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'duration': self.duration,
+            'workspace_id': self.workspace_id
+        }
+
 
 class Test(db.Model):
     id = Column(db.Integer, primary_key=True)
