@@ -40,3 +40,11 @@ def get_all_workitems_by_workspace_id(workspace_id):
 
 def get_workspace_by_id(workspace_id):
     return Workspace.query.filter(Workspace.id == workspace_id).one_or_none()
+
+
+def get_all_workitems_by_workspace_id(workspace_id):
+    return Workitem.query.filter(Workitem.workspace_id == workspace_id).all()
+
+
+def check_project_and_workspace_ownership(user_id, project_id, workspace_id):
+    return Project.query.filter(and_(Project.user_id == user_id, Project.id == project_id, Workspace.id == workspace_id, Workspace.project_id == project_id)).one_or_none()
