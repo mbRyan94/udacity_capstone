@@ -1,44 +1,58 @@
-from flask import abort, request
+from flask import abort, jsonify, request
 from flask_restful import Resource
 import sys
-import os
-import requests
+import datetime
+from sqlalchemy.exc import SQLAlchemyError
 
-from src.authentication.auth import require_auth, AuthError, get_token_auth_header
-
-from src.db.models import Workitem
+from src.db.models import Workitem as db_Workitem
+from src.authentication.auth import require_auth, AuthError, get_token_user_id
 import src.db.query as db
 
 
 class Workitems(Resource):
-    @require_auth('post:workitems')
-    def post(self, jwt_payload):
+    method_decorators = [require_auth('post:workitems')]
+
+    def post(self, jwt_payload, project_id, workspace_id):
         try:
+            user_id = get_token_user_id(jwt_payload)
+            is_users_project = db.check_project_and_workspace_ownership(
+                user_id, project_id, workspace_id)
+            if not is_users_project:
+                raise AuthError({
+                    'status': 'invalid_project_and_workspace_permission',
+                    'description': 'action is not allowed for this user'
+                }, 401)
             req_data = request.get_json()
             print(req_data)
             name = req_data['name']
             description = req_data['description']
             duration = req_data['duration']
-            workspace_id = req_data['workspace_id']
+
             print('workspace_id: ', workspace_id)
-            print(req_data)
-            new_item = Workitem(
+
+            new_item = db_Workitem(
                 name=name, description=description, duration=duration, workspace_id=workspace_id)
-            if not new_item:
-                abort(400)
-            Workitem.insert(new_item)
-            workitems = Workitem.query.all()
-            res = []
+
+            db_Workitem.insert(new_item)
+            workitems = db.get_all_workitems_by_workspace_id(
+                workspace_id)
+            res_data = []
             for workitem in workitems:
 
-                res.append({
+                res_data.append({
                     "name": workitem.name,
                     "description": workitem.description,
                     "duration": workitem.duration,
-                    "project_id": workitem.workspace_id
+                    "workspace_id": workitem.workspace_id
                 })
 
-            return {"new_workspace": res}
+            return {"workitems": res_data}
+        except AuthError:
+            return {
+                'success': False,
+                'error': 401,
+                'message': 'unauthorized'
+            }
         except Exception:
             print(sys.exc_info())
             return {
@@ -47,48 +61,44 @@ class Workitems(Resource):
                 "message": "SERVER ERROR"
             }
 
-    @require_auth('get:workitems')
-    def get(self, jwt_payload):
-        try:
-            workspace_id = request.args.get('workspace_id')
-            print('workspace_id: ', workspace_id)
-            workitems = db.get_workitems_by_workspace_id(workspace_id)
-            if not workitems:
-                print(sys.exc_info())
-                abort(404)
+    method_decorators = [require_auth('get:workitems')]
 
+    def get(self, jwt_payload, project_id, workspace_id):
+        try:
+            user_id = get_token_user_id(jwt_payload)
+            is_users_project = db.check_project_and_workspace_ownership(
+                user_id, project_id, workspace_id)
+            if not is_users_project:
+                raise AuthError({
+                    'status': 'invalid_project_and_workspace_permission',
+                    'description': 'action is not allowed for this user'
+                }, 401)
+
+            workitems = db.get_all_workitems_by_workspace_id(
+                workspace_id)
             res_data = []
-            for item in workitems:
+            for workitem in workitems:
+
                 res_data.append({
-                    'id': item.id,
-                    'name': item.name,
-                    'description': item.description,
-                    'duration': item.duration
+                    "name": workitem.name,
+                    "description": workitem.description,
+                    "duration": workitem.duration,
+                    "workspace_id": workitem.workspace_id
                 })
+
+            return {"workitems": res_data}
+
+        except AuthError:
             return {
-                'success': True,
-                'workitems': res_data
+                'success': False,
+                'error': 401,
+                'message': 'unauthorized'
             }
         except Exception:
             print(sys.exc_info())
-            abort(500)
+            return {
+                "success": False,
+                "error": 500,
+                "message": "SERVER ERROR"
+            }
 
-# client:
-#     /projects/: id
-#     /workspaces/: id
-#     /workitems/: id
-
-# backend:
-#     /api/user_id/projects/project_id/workspaces/id/Workitems/id
-
-#     /api/projects?user_id = xxx
-#     /api/workspaces?user_id = xxx
-#     /api/Workitems?user_id = xxx
-
-#     Select *
-#     from worspace
-#     where project_id = (
-#         Select id
-#         from project
-#         where project.user_id=user_id
-#     )
