@@ -6,12 +6,12 @@ from datetime import datetime, timedelta
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.db.models import Project
-from src.authentication.auth import require_auth, AuthError
+from src.authentication.auth import require_auth, AuthError, get_token_user_id
 import src.db.query as db
 
 
 class Projects(Resource):
-    decorators = [require_auth('get:projects')]
+    method_decorators = [require_auth('get:projects')]
     # @require_auth('get:projects')
 
     def get(self, jwt_payload):
@@ -38,7 +38,8 @@ class Projects(Resource):
             })
         return jsonify(projects)
 
-    @require_auth('post:projects')
+    method_decorators = [require_auth('post:projects')]
+
     def post(self, jwt_payload):
         try:
             req_data = request.get_json()
@@ -54,8 +55,7 @@ class Projects(Resource):
             start_date = datetime.now().date()
             print('start_date: ', start_date)
             end_date = start_date + timedelta(days=14)
-
-            user_id = req_data['user_id']
+            user_id = get_token_user_id(jwt_payload)
 
             new_project = Project(
                 name=name, description=description, start_date=start_date, end_date=end_date, user_id=user_id)
@@ -72,7 +72,10 @@ class Projects(Resource):
                     "user_id": project.user_id
                 })
 
-            return {"projects": res}
+            return {
+                "success": True,
+                "projects": res
+            }
         except Exception:
             print(sys.exc_info())
             return {
