@@ -25,6 +25,12 @@ class Projects(Resource):
         except SQLAlchemyError:
             print(sys.exc_info())
             abort(404)
+        except AuthError:
+            return {
+                'status': False,
+                'error': 401,
+                'message': 'unauthorized'
+            }
 
         for project in projects_from_db:
             projects.append({
@@ -36,7 +42,10 @@ class Projects(Resource):
                 'user_id': project.user_id
 
             })
-        return jsonify(projects)
+        return jsonify({
+            'success': True,
+            'projects': projects
+        })
 
     method_decorators = [require_auth('post:projects')]
 
