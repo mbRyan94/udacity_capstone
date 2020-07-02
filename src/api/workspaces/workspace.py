@@ -2,6 +2,7 @@ from flask import abort, jsonify, request
 from flask_restful import Resource
 import sys
 import datetime
+import werkzeug
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.db.models import Workspace as db_Workspace
@@ -40,7 +41,10 @@ class Workspace(Resource):
                 'workspace': workspace.format(),
                 'workitems': res_workitems
             }
-
+        except werkzeug.exceptions.NotFound:
+            abort(404)
+        except AuthError:
+            abort(401)
         except Exception:
             print(sys.exc_info())
             abort(500)
