@@ -35,7 +35,10 @@ class Workspaces(Resource):
                     "price": workspace.price,
                     "project_id": workspace.project_id
                 })
-            return jsonify({"workspaces": res})
+            return jsonify({
+                "success": True,
+                "workspaces": res
+            })
         except AuthError:
             print(sys.exc_info())
             abort(401)
@@ -81,7 +84,10 @@ class Workspaces(Resource):
                     "price": workspace.price,
                     "project_id": workspace.project_id
                 })
-            return jsonify({"workspaces": res})
+            return jsonify({
+                "success": True,
+                "workspaces": res
+            })
         except AuthError:
             print(sys.exc_info())
             abort(401)
