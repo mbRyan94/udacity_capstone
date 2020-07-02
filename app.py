@@ -11,6 +11,7 @@ from urllib.error import HTTPError
 from src.db.models import setup_db, Project, Workspace, Workitem
 from src.authentication.auth import require_auth, AuthError
 from src.api.routes import initialize_routes
+import src.error_handlers.error_handlers as errors
 
 load_dotenv()
 
@@ -18,7 +19,7 @@ load_dotenv()
 def create_app(test_config=None):
 
     app = Flask(__name__)
-    api = Api(app)
+    api = Api(app, errors=errors)
     heroku = Heroku(app)
     setup_db(app)
     app.config["SQLALCHEMY_DATABASE_URI"]
@@ -202,24 +203,32 @@ def create_app(test_config=None):
             'message': 'bad request'
         }), 400
 
-    @app.errorhandler(404)
-    def bad_request(error):
-        return jsonify({
-            'success': False,
-            'error': 404,
-            'message': 'resource not found'
-        }), 400
-
     @app.errorhandler(401)
-    def bad_request(error):
+    def unauthorized(error):
         return jsonify({
             'success': False,
             'error': 401,
             'message': 'unauthorized'
         }), 401
 
+    @app.errorhandler(404)
+    def resource_not_found(error):
+        return jsonify({
+            'success': False,
+            'error': 404,
+            'message': 'resource not found'
+        }), 404
+
+    @app.errorhandler(405)
+    def method_not_allowed(error):
+        return jsonify({
+            'success': False,
+            'error': 405,
+            'message': 'method not allowed'
+        }), 405
+
     @app.errorhandler(500)
-    def bad_request(error):
+    def server_error(error):
         return jsonify({
             'success': False,
             'error': 500,
