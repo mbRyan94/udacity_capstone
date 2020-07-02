@@ -177,6 +177,6 @@ def get_token_user_id(jwt_payload):
         return AuthError({
             'status': 'token_without_subject',
             'description': 'no user provided'
-        })
+        }, 401)
     user_id = subject.split('|')[1]
     return user_id
