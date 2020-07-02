@@ -163,10 +163,14 @@ def require_auth(permission=""):
     def auth_decorator_function(func):
         @wraps(func)
         def func_wrapper(*args, **kwargs):
-            token = get_token_auth_header()
-            payload = verify_decoded_jwt(token)
-            check_permissions(permission, payload)
-            return func(payload, *args, **kwargs)
+            try:
+                token = get_token_auth_header()
+                payload = verify_decoded_jwt(token)
+                check_permissions(permission, payload)
+                return func(payload, *args, **kwargs)
+            except AuthError:
+                abort(401)
+
         return func_wrapper
     return auth_decorator_function
 
