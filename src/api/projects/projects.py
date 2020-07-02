@@ -26,11 +26,8 @@ class Projects(Resource):
             print(sys.exc_info())
             abort(404)
         except AuthError:
-            return {
-                'status': False,
-                'error': 401,
-                'message': 'unauthorized'
-            }
+            print(sys.exc_info())
+            abort(401)
 
         for project in projects_from_db:
             projects.append({
@@ -54,11 +51,8 @@ class Projects(Resource):
             req_data = request.get_json()
             print(req_data)
             if not req_data:
-                return {
-                    'success': False,
-                    'error': 400,
-                    'message': 'bad request'
-                }
+                print(sys.exc_info())
+                abort(400)
             name = req_data['name']
             description = req_data['description']
             start_date = datetime.now().date()
@@ -69,7 +63,7 @@ class Projects(Resource):
             new_project = Project(
                 name=name, description=description, start_date=start_date, end_date=end_date, user_id=user_id)
             Project.insert(new_project)
-            projects = Project.query.all()
+            projects = db.get_all_projects_by_user_id(user_id)
             res = []
             for project in projects:
 
@@ -85,10 +79,9 @@ class Projects(Resource):
                 "success": True,
                 "projects": res
             }
+        except AuthError:
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
-            return {
-                'success': False,
-                'error': 500,
-                'message': 'SERVER ERROR'
-            }
+            abort(500)
