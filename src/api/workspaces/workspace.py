@@ -14,8 +14,7 @@ class Workspace(Resource):
 
     def get(self, jwt_payload, project_id, workspace_id):
         try:
-            # print('proj_id: ', project_id)
-            # print('workspace_id: ', workspace_id)
+
             user_id = get_token_user_id(jwt_payload)
 
             workspace = db.get_workspace_by_id_project_id_and_user_id(
@@ -23,11 +22,7 @@ class Workspace(Resource):
             print('ws: ', workspace)
             if not workspace:
                 print(sys.exc_info())
-                return {
-                    'success': False,
-                    'error': 404,
-                    'message': 'resource not found'
-                }
+                abort(404)
 
             workitems = db.get_all_workitems_by_workspace_id(workspace_id)
 
@@ -48,8 +43,4 @@ class Workspace(Resource):
 
         except Exception:
             print(sys.exc_info())
-            return {
-                'success': False,
-                'error': 500,
-                'message': 'SERVER ERROR'
-            }
+            abort(500)

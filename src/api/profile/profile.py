@@ -28,6 +28,8 @@ class Profile(Resource):
             json_profile = profile.json()
 
             return {'profile': json_profile}
+        except AuthError:
+            abort(401)
         except requests.exceptions.RequestException:
             print(sys.exc_info())
             abort(400)

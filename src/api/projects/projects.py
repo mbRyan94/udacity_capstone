@@ -28,6 +28,9 @@ class Projects(Resource):
         except AuthError:
             print(sys.exc_info())
             abort(401)
+        except Exception:
+            print(sys.exc_info())
+            abort(500)
 
         for project in projects_from_db:
             projects.append({
@@ -64,6 +67,9 @@ class Projects(Resource):
                 name=name, description=description, start_date=start_date, end_date=end_date, user_id=user_id)
             Project.insert(new_project)
             projects = db.get_all_projects_by_user_id(user_id)
+            if not projects:
+                print(sys.exc_info())
+                abort(404)
             res = []
             for project in projects:
 

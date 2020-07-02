@@ -36,6 +36,9 @@ class Workitems(Resource):
             db_Workitem.insert(new_item)
             workitems = db.get_all_workitems_by_workspace_id(
                 workspace_id)
+            if not workitems:
+                print(sys.exc_info())
+                abort(404)
             res_data = []
             for workitem in workitems:
 
@@ -48,18 +51,11 @@ class Workitems(Resource):
 
             return {"workitems": res_data}
         except AuthError:
-            return {
-                'success': False,
-                'error': 401,
-                'message': 'unauthorized'
-            }
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
-            return {
-                "success": False,
-                "error": 500,
-                "message": "SERVER ERROR"
-            }
+            abort(500)
 
     method_decorators = [require_auth('get:workitems')]
 
@@ -89,16 +85,8 @@ class Workitems(Resource):
             return {"workitems": res_data}
 
         except AuthError:
-            return {
-                'success': False,
-                'error': 401,
-                'message': 'unauthorized'
-            }
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
-            return {
-                "success": False,
-                "error": 500,
-                "message": "SERVER ERROR"
-            }
-
+            abort(500)

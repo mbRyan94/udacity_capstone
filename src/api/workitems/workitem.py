@@ -23,11 +23,7 @@ class Workitem(Resource):
                 user_id, project_id, workspace_id, workitem_id)
             if not workitem:
                 print(sys.exc_info())
-                return {
-                    'success': False,
-                    'error': 404,
-                    'message': 'resource not found'
-                }
+                abort(404)
             return {
                 'id': workitem.id,
                 'name': workitem.name,
@@ -35,6 +31,9 @@ class Workitem(Resource):
                 'duration': workitem.duration,
                 'workspace_id': workitem.workspace_id
             }
+        except AuthError:
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
             abort(500)
@@ -45,9 +44,6 @@ class Workitem(Resource):
         try:
             req_data = request.get_json()
             print('req_data: ', req_data)
-            # name = req_data['name']
-            # description = req_data['description']
-            # duration = req_data['duration']
 
             user_id = get_token_user_id(jwt_payload)
             print('work: ', db.get_workitem_by_id_project_id_user_id_and_workspace_id(
@@ -57,11 +53,7 @@ class Workitem(Resource):
                 user_id, project_id, workspace_id, workitem_id)
             if not workitem:
                 print(sys.exc_info())
-                return {
-                    'success': False,
-                    'error': 404,
-                    'message': 'resource not found'
-                }
+                abort(404)
             if 'name' in req_data:
                 workitem.name = req_data['name']
             if 'description' in req_data:
@@ -73,8 +65,14 @@ class Workitem(Resource):
             updated_workitem = db.get_workitem_by_id_project_id_user_id_and_workspace_id(
                 user_id, project_id, workspace_id, workitem_id)
 
-            return {'workitem': updated_workitem.format()}
+            return {
+                'success': True,
+                'workitem': updated_workitem.format()
+            }
 
+        except AuthError:
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
             abort(500)

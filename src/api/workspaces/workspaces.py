@@ -37,18 +37,11 @@ class Workspaces(Resource):
                 })
             return jsonify({"workspaces": res})
         except AuthError:
-            return {
-                'success': False,
-                'error': 401,
-                'message': 'unauthorized'
-            }
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
-            return {
-                "success": False,
-                "error": 500,
-                "message": "SERVER ERROR"
-            }
+            abort(500)
 
     method_decorators = [require_auth('post:workspaces')]
 
@@ -75,6 +68,10 @@ class Workspaces(Resource):
 
             workspaces = db.get_all_workspaces_by_project_and_user(
                 user_id, project_id)
+
+            if not workspaces:
+                print(sys.exc_info())
+                abort(404)
             res = []
             for workspace in workspaces:
 
@@ -86,15 +83,8 @@ class Workspaces(Resource):
                 })
             return jsonify({"workspaces": res})
         except AuthError:
-            return {
-                'success': False,
-                'error': 401,
-                'message': 'unauthorized'
-            }
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
-            return {
-                "success": False,
-                "error": 500,
-                "message": "SERVER ERROR"
-            }
+            abort(500)

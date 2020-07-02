@@ -21,11 +21,7 @@ class Project(Resource):
                 user_id, project_id)
             if not project:
                 print(sys.exc_info())
-                return {
-                    'success': False,
-                    'error': 404,
-                    'message': 'resource not found'
-                }
+                abort(404)
 
             project_workspaces = []
             workspaces = db.get_all_workspaces_by_project_and_user(
@@ -49,7 +45,9 @@ class Project(Resource):
                 'project': project.format(),
                 'workspaces': project_workspaces
             })
-
+        except AuthError:
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
             abort(500)
@@ -63,16 +61,15 @@ class Project(Resource):
                 user_id, project_id)
             if not project:
                 print(sys.exc_info())
-                return {
-                    'success': False,
-                    'error': 404,
-                    'message': 'resource not found'
-                }
+                abort(404)
             delete = project.delete()
             print(delete)
             if not delete:
                 print(sys.exc_info())
             updated_projects = db.get_all_projects_by_user_id(user_id)
+            if not updated_projects:
+                print(sys.exc_info())
+                abort(404)
             res_data = []
             for project in updated_projects:
                 res_data.append({
@@ -87,6 +84,9 @@ class Project(Resource):
                 'success': True,
                 'projects': res_data
             })
+        except AuthError:
+            print(sys.exc_info())
+            abort(401)
         except Exception:
             print(sys.exc_info())
             abort(500)
