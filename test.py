@@ -18,7 +18,7 @@ import src.db.query as query
 # app = SourceFileLoader("app", "app.py").load_module()
 # db = SourceFileLoader("module", "../db/module.py").load_module()
 # Please create a new token before running the tests
-token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM2NzYxMDcsImV4cCI6MTU5MzY4MzMwNywiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.EMBjBLTb1YnR7cnlTuAg55A4WJzB13hDI3sju9hEJrGNbL6mqcymN9M1_28NOSqT3yyUIa42MZsrF_vzxrPTkzb4UZfokKPWAv2bVADeH-O6Noowjh1w9UPQINpbeZ1Hsy2-ecqTMsHPS8rULXMlGdXFPK21_EHyS6-rTppki6h3GkC_wDcE_QaDJguh9nFuivSLkwnzIykwpwZx8vLGXxr7zJ84SJlCTaKysSy6saOnU_HYrZ18-FeXot_CwJtZZQiBd8hJoqBHBhTB58OHbVycZerUjnrc6Vs1iG0t7c_H93xtrjr4gPeX9pDUWCxeVMdceDnDcZhXuayZduuIQg'
+token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM3MjM3MTAsImV4cCI6MTU5MzczMDkxMCwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.cQ_wYEgH1e5umWQObut6Af3x_gj35uBX-v9e9-Zrwxz8Dhspl-6Zb5nH4TUddK2b7pTIITwpS__1gS-PV9PESlX28pugSlZU65G0SAmcSe6bs452hqKyCpbIB2q5DwTAjvoVDl1e1t0-ZKl0FZkC4fd7NkaI8LV3CMBGiSNmB02VRaDcOMIt5i2C5STDlMVv7Xo_YtvVpXZUuUlZCZZoYMyvyN81MzcgKwU1oXh1nRXSbYTacIkNdegCoZ2ioFU-U8OkCIMi2lbJCT3jswcuNtrI7_tuT71p8ZCssJIdhbH2IEgZgJ_m88pdFyfPRpUstb90qnUPj4Ppo7GCisciIA'
 
 # A token without openID scopes to fetch Auth0 /userinfo endpoint
 restricted_permission_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOiJmcmVldGltZSIsImlhdCI6MTU5MzY3MDA1MiwiZXhwIjoxNTkzNjc3MjUyLCJhenAiOiJ2T3phb25qcmZmZ1BkYTd1SE5RNHFHcXJINEl2RXZoVSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.JI6KJQClODrEb7Tiv-nFdkav_Ln7F9jfSidPc2GCEg3f7Md_atbxaZqhEjUkZG-gDb3ZetkyajJx67prl0dY5pfDskKSPAYWzekk5aokRIECCEvwsZpW7BUNRpPxeDapTzRUAS-rSE-hPccZspfTDLAV8R9M6wJv07PIOn1LtmU3CzQQAAWQzivGou5DPxiIkPdllO_BUYxaU5cB9t8SfJcYoAzofj5LxV-U9HAd_lMYHwmNAM0w7VZn8YAnsXEqStWxugHOS0fnYxar6yLq6GjX7nzh79KRgGgbnF-WGeFWL98eOtv9T0rLnf8qTE8Tr0a1w9_NwZvd-C-ebVFXZw'
@@ -94,6 +94,73 @@ class TestCases(unittest.TestCase):
         self.assertEqual(res.status_code, 405)
         self.assertFalse(data['success'])
 
+    #test project routes
+    def test_get_project_success(self):
+        res = self.client().get('api/projects/29', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertTrue(data['project'])
+        self.assertTrue(data['project']['id'])
+
+    def test_get_project_failure(self):
+        res = self.client().get('api/projects/-1', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertFalse(data['success'])
+        
+
+    # test workspace routes
+    def test_get_user_and_project_specific_workspaces_success(self):
+        res = self.client().get('/api/projects/29/workspaces', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertTrue(data['workspaces'])
+
+    def test_get_user_and_project_specific_workspaces_failure(self):
+        # user has no permission to access project 31s workspaces. There are relatated to another user
+        res = self.client().get('/api/projects/31/workspaces', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 401)
+        self.assertFalse(data['success'])
+        
+       
+    def test_post_new_workspace_success(self):
+        res = self.client().post('/api/projects/29/workspaces', json=self.new_workspace , headers={'Authorization': 'Bearer {}'.format(token)})
+
+        data = json.loads(res.data)
+        print('post_new_project_data: ', data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['workspaces'])
+        self.assertTrue(data['success'])
+
+    def test_post_new_workspace_failure(self):
+        res = self.client().post('/api/projects/31/workspaces', json=self.new_workspace , headers={'Authorization': 'Bearer {}'.format(token)})
+
+        data = json.loads(res.data)
+        print('post_new_project_data: ', data)
+        self.assertEqual(res.status_code, 401)
+        self.assertFalse(data['success'])
+
+    #test workpace routes
+    def test_get_project_success(self):
+        res = self.client().get('api/projects/29/workspaces/39', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertTrue(data['workspace'])
+        self.assertEqual(data['workspace']['id'], 39)
+
+    def test_get_project_failure(self):
+        res = self.client().get('api/projects/29/workspaces/41', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertFalse(data['success'])
+
+    # workitems routes
+
+
     # test profile route
     def test_profile(self):
         res = self.client().get('/api/profile', headers={'Authorization': 'Bearer {}'.format(token)})
@@ -110,8 +177,7 @@ class TestCases(unittest.TestCase):
         self.assertEqual(data['error'], 401)
         self.assertFalse(data['success'])
 
-    # def test_get_user_and_project_specific_workspaces(self)
-    #     res = self.client().get()
+   
         
 
 
