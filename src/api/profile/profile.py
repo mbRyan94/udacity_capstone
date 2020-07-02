@@ -27,7 +27,10 @@ class Profile(Resource):
                 }, 401)
             json_profile = profile.json()
 
-            return {'profile': json_profile}
+            return {
+                'success': True,
+                'profile': json_profile
+            }
         except AuthError:
             abort(401)
         except requests.exceptions.RequestException:
