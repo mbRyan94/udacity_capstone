@@ -49,7 +49,10 @@ class Workitems(Resource):
                     "workspace_id": workitem.workspace_id
                 })
 
-            return {"workitems": res_data}
+            return {
+                "success": True,
+                "workitems": res_data
+            }
         except AuthError:
             print(sys.exc_info())
             abort(401)
@@ -82,7 +85,10 @@ class Workitems(Resource):
                     "workspace_id": workitem.workspace_id
                 })
 
-            return {"workitems": res_data}
+            return {
+                "success": True,
+                "workitems": res_data
+            }
 
         except AuthError:
             print(sys.exc_info())
