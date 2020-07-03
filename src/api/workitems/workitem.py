@@ -2,7 +2,9 @@ from flask import abort, jsonify, request
 from flask_restful import Resource
 import sys
 import datetime
+import werkzeug
 from sqlalchemy.exc import SQLAlchemyError
+
 
 from src.authentication.auth import require_auth, AuthError, get_token_user_id
 
@@ -25,12 +27,19 @@ class Workitem(Resource):
                 print(sys.exc_info())
                 abort(404)
             return {
-                'id': workitem.id,
-                'name': workitem.name,
-                'description': workitem.description,
-                'duration': workitem.duration,
-                'workspace_id': workitem.workspace_id
+                'success': True,
+                'workitem': {
+                    'id': workitem.id,
+                    'name': workitem.name,
+                    'description': workitem.description,
+                    'duration': workitem.duration,
+                    'workspace_id': workitem.workspace_id
+                }
+
             }
+        except werkzeug.exceptions.NotFound:
+            print(sys.exc_info())
+            abort(404)
         except AuthError:
             print(sys.exc_info())
             abort(401)
@@ -70,6 +79,9 @@ class Workitem(Resource):
                 'workitem': updated_workitem.format()
             }
 
+        except werkzeug.exceptions.NotFound:
+            print(sys.exc_info())
+            abort(404)
         except AuthError:
             print(sys.exc_info())
             abort(401)
