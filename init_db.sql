@@ -223,7 +223,7 @@ COPY public.project (id, name, description, start_date, end_date, user_id) FROM 
 21	Client #17	dev and design stuff	2020-06-27 10:10:51.761391	2020-07-11 10:10:51.761391	5ee344e01fb8c3001471413c
 22	Client #17	dev and design stuff	2020-06-27 10:11:11.248085	2020-07-11 10:11:11.248085	5ee344e01fb8c3001471413c
 23	Client #18	dev and design stuff	2020-06-27 00:00:00	2020-07-11 00:00:00	5ee344e01fb8c3001471413c
-24	Client #18	dev and design stuff	2020-06-27 00:00:00	2020-07-11 00:00:00	5ee344e01fb8c3001471413c
+24	Client #18	dev and design stuff	2020-06-27 00:00:00	2020-07-11 00:00:00	5efedcaca9ced90019caef18
 25	Client #18	dev and design stuff	2020-06-27 00:00:00	2020-06-27 00:00:00	5ee344e01fb8c3001471413c
 26	Client #18	dev and design stuff	2020-06-27 00:00:00	2020-07-11 00:00:00	5ee344e01fb8c3001471413c
 27	Client #19	dev and design stuff	2020-06-27 00:00:00	2020-07-11 00:00:00	5ee344e01fb8c3001471413c
