@@ -39,7 +39,7 @@ def downgrade():
                     )
     op.create_table('project',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
-                        'nextval(\'"Project_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
+                        'nextval(\'"project_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
                               autoincrement=False, nullable=True),
                     sa.Column('description', sa.VARCHAR(),
@@ -50,11 +50,11 @@ def downgrade():
                               autoincrement=False, nullable=True),
                     sa.Column('user_id', sa.VARCHAR(),
                               autoincrement=False, nullable=False),
-                    sa.PrimaryKeyConstraint('id', name='Project_pkey')
+                    sa.PrimaryKeyConstraint('id', name='project_pkey')
                     )
     op.create_table('workspace',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
-                        'nextval(\'"Workspace_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
+                        'nextval(\'"workspace_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
                               autoincrement=False, nullable=True),
                     sa.Column('description', sa.VARCHAR(),
@@ -67,11 +67,11 @@ def downgrade():
                               autoincrement=False, nullable=True),
                     sa.ForeignKeyConstraint(
                         ('project_id', ), ['project.id'], ondelete="CASCADE"),
-                    sa.PrimaryKeyConstraint('id', name='Workspace_pkey')
+                    sa.PrimaryKeyConstraint('id', name='workspace_pkey')
                     )
     op.create_table('workitem',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
-                        'nextval(\'"Workitem_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
+                        'nextval(\'"workitem_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
                               autoincrement=False, nullable=True),
                     sa.Column('description', sa.VARCHAR(),
@@ -82,6 +82,6 @@ def downgrade():
                               autoincrement=False, nullable=True),
                     sa.ForeignKeyConstraint(
                         ('workspace_id', ),  ['workspace.id'], ondelete="CASCADE"),
-                    sa.PrimaryKeyConstraint('id', name='Workitem_pkey')
+                    sa.PrimaryKeyConstraint('id', name='workitem_pkey')
                     )
     # ### end Alembic commands ###
