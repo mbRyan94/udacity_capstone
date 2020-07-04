@@ -37,7 +37,7 @@ def downgrade():
                               autoincrement=False, nullable=True),
                     sa.PrimaryKeyConstraint('id', name='user_pkey')
                     )
-    op.create_table('Project',
+    op.create_table('project',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
                         'nextval(\'"Project_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
@@ -52,7 +52,7 @@ def downgrade():
                               autoincrement=False, nullable=False),
                     sa.PrimaryKeyConstraint('id', name='Project_pkey')
                     )
-    op.create_table('Workspace',
+    op.create_table('workspace',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
                         'nextval(\'"Workspace_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
@@ -69,7 +69,7 @@ def downgrade():
                         ('project_id', ), ['project.id'], ondelete="CASCADE"),
                     sa.PrimaryKeyConstraint('id', name='Workspace_pkey')
                     )
-    op.create_table('Workitem',
+    op.create_table('workitem',
                     sa.Column('id', sa.INTEGER(), server_default=sa.text(
                         'nextval(\'"Workitem_id_seq"\'::regclass)'), autoincrement=True, nullable=False),
                     sa.Column('name', sa.VARCHAR(),
