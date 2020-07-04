@@ -8,6 +8,7 @@ import sys
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask.helpers import url_for
+from dotenv import load_dotenv
 # from models import setup_db, Project, Workspace, Workitem
 # from ..app import create_app
 from importlib.machinery import SourceFileLoader
@@ -15,14 +16,26 @@ from app import create_app
 import src.db.models as db
 import src.db.query as query
 
+load_dotenv()
+
 # app = SourceFileLoader("app", "app.py").load_module()
 # db = SourceFileLoader("module", "../db/module.py").load_module()
+
 # Please create a new token before running the tests
-token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM3NTU1ODgsImV4cCI6MTU5Mzc2Mjc4OCwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.BXa11omkwHVpH7gJHxgwye_xLJEQbTu58_jOyUVGcarwlCrb7jWpLI5YX5h-ficWgsGffnGj0dXETeHAGyCd6bIcZHjIsxuo6aj5Ka4GcZJjkhm6HixddtjyGgZgWwbzXNYZbctDPPUMi5hDvwnKuE3llfcCuCRsugNCgstXkeJGabgs3ynj7LpLR8vipwVNyuRJwnihrts_1D9Hju9RXdFxI8Ey9YJO2p9Bh7I30U_pmPcLGKpNG0nAvaV2KdBDUrR65YQP7p0LMV9uvgPYN7yRAR3RH2HXRruiq5YZCtdGg5jp7WireDcORrsqRWA3EQeiGAOLO825yQAw62PqkA'
 
-# A token without openID scopes to fetch Auth0 /userinfo endpoint
-restricted_permission_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOiJmcmVldGltZSIsImlhdCI6MTU5MzY3MDA1MiwiZXhwIjoxNTkzNjc3MjUyLCJhenAiOiJ2T3phb25qcmZmZ1BkYTd1SE5RNHFHcXJINEl2RXZoVSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.JI6KJQClODrEb7Tiv-nFdkav_Ln7F9jfSidPc2GCEg3f7Md_atbxaZqhEjUkZG-gDb3ZetkyajJx67prl0dY5pfDskKSPAYWzekk5aokRIECCEvwsZpW7BUNRpPxeDapTzRUAS-rSE-hPccZspfTDLAV8R9M6wJv07PIOn1LtmU3CzQQAAWQzivGou5DPxiIkPdllO_BUYxaU5cB9t8SfJcYoAzofj5LxV-U9HAd_lMYHwmNAM0w7VZn8YAnsXEqStWxugHOS0fnYxar6yLq6GjX7nzh79KRgGgbnF-WGeFWL98eOtv9T0rLnf8qTE8Tr0a1w9_NwZvd-C-ebVFXZw'
+token = os.environ['freelancer_token']
 
+# A token WITHOUT openID scopes to fetch Auth0 /userinfo endpoint
+restricted_permission_token = os.environ['intern_token_no_openId_scope']
+
+#token from intern role without project delete and post permission
+intern_token = os.environ['intern_token']
+
+# A token WITHOUT openID scopes to fetch Auth0 /userinfo endpoint
+# restricted_permission_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWZlZGNhY2E5Y2VkOTAwMTljYWVmMTgiLCJhdWQiOiJmcmVldGltZSIsImlhdCI6MTU5Mzg0NDk2MSwiZXhwIjoxNTkzOTMxMzYxLCJhenAiOiJ2T3phb25qcmZmZ1BkYTd1SE5RNHFHcXJINEl2RXZoVSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OnByb2plY3QiLCJnZXQ6cHJvamVjdHMiLCJnZXQ6d29ya2l0ZW0iLCJnZXQ6d29ya2l0ZW1zIiwiZ2V0OndvcmtzcGFjZSIsImdldDp3b3Jrc3BhY2VzIiwicGF0Y2g6d29ya2l0ZW0iLCJwb3N0OndvcmtpdGVtcyJdfQ.RFluX9r0G8L3Iv1B5eY3Ly_POnqW34OTrjJix54zszr5ZjHnzJHes1ldxuICzlXLHg_X341Nwob3NAJZ_evyWogG0DULHDOnI_iqJsByltw8ywb7jGr6rFWyrLCMdpuduTOISjDVNrrwT7uTjL9shTItOEf8N4Ce12XhzuOz1swYZF9_sRiQlnOcXIcvYs9hRbajRj_Q0dg2bCMLDf6Cm8oTdTLbmJTmRtlPNsVkG6xmtT_cZreDF2ifoo8WaaKLFNqZqqPZe-mREekAF3J4QXTPfy4iPlNbHjDaAQ3KPbKMJZkI-JVSR7cNlSS2M9IW2HRvtjXpvoHummV9CqSkQw'
+
+#token from intern role without project delete and post permission
+# intern_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWZlZGNhY2E5Y2VkOTAwMTljYWVmMTgiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM4NDQ3NzQsImV4cCI6MTU5MzkzMTE3NCwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZ2V0OnByb2plY3QiLCJnZXQ6cHJvamVjdHMiLCJnZXQ6d29ya2l0ZW0iLCJnZXQ6d29ya2l0ZW1zIiwiZ2V0OndvcmtzcGFjZSIsImdldDp3b3Jrc3BhY2VzIiwicGF0Y2g6d29ya2l0ZW0iLCJwb3N0OndvcmtpdGVtcyJdfQ.lw_skfUY1Kxh4TO8KxWnqg3mx49lnGRXIGgVfTFnm4emQPWwRb4MfCCuh3BdkBBSOeEJ12KQ39xzZQfuDhSdS8f8LAHyCIVtzuwgCamey3RpPZOQLosYwIavyBCOxcYSuKdW9ZFXZSQrE4aBCYf7v26VLEn3efEVjFOuFXC6SORfYlJMAD6s5kMmoRrTVHjN0ipkYpq1PhDqJf8dvEucPzutGFmPIgpPegH2lFU7i2VL-SSlSJng5YwG8MuO6dog2gK8_XmCtlX85HBCDyGYc46fKebYRx2yA6VnF-xfbjkoa6yCPQ7qp4Y56iuSbmD4LhwX1iroawnO1nVMZcMREQ'
 
 
 class TestCases(unittest.TestCase):
@@ -30,10 +43,10 @@ class TestCases(unittest.TestCase):
         try:
             self.app = create_app()
             self.client = self.app.test_client
-            self.headers = {'Content-Type': 'application/json',
-                            'Authorization': 'Bearer {}'.format(token)}
+            # self.headers = {'Content-Type': 'application/json',
+            #                 'Authorization': 'Bearer {}'.format(token)}
             self.database_name = "test_db"
-            self.database_path = "postgresql://{}{}".format(
+            self.database_path = "postgresql://{}/{}".format(
                 'localhost:5432', self.database_name)
             db.setup_db(self.app, self.database_path)
 
@@ -115,7 +128,34 @@ class TestCases(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        
+
+    def test_delete_project_success(self):
+        res = self.client().delete('/api/projects/20', headers={'Authorization': 'Bearer {}'.format(token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+
+    def test_delete_project_wrong_user_failure(self):
+        res = self.client().delete('/api/projects/22', headers={'Authorization': 'Bearer {}'.format(intern_token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 401)
+        self.assertFalse(data['success'])
+
+    # using the intern token which does not have the post:project permission
+    def test_post_project_missing_permission_failure(self):
+        res = self.client().post('/api/projects', headers={'Authorization': 'Bearer {}'.format(intern_token)}, json=self.new_project)
+        data = json.loads(res.data)
+        print('test data: ', data, res.status_code)
+        self.assertEqual(res.status_code, 401)
+        self.assertFalse(data['success'])
+
+    # using the intern token which does not have the delete:project permission
+    def test_delete_project_wrong_user_failure(self):
+        res = self.client().delete('/api/projects/32', headers={'Authorization': 'Bearer {}'.format(intern_token)})
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 401)
+        self.assertFalse(data['success'])
+
 
     # test workspace routes
     def test_get_user_and_project_specific_workspaces_success(self):
