@@ -22,7 +22,7 @@ def create_app(test_config=None):
     api = Api(app, errors=errors)
     heroku = Heroku(app)
     setup_db(app)
-    app.config["SQLALCHEMY_DATABASE_URI"]
+    # app.config["SQLALCHEMY_DATABASE_URI"]
     initialize_routes(api)
 
     CORS(app)
