@@ -8,8 +8,6 @@ from src.db.models import Workspace as db_Workspace
 from src.authentication.auth import require_auth, AuthError, get_token_user_id
 import src.db.query as db
 
-# /projects/:id/workspaces
-
 
 class Workspaces(Resource):
     method_decorators = [require_auth('get:workspaces')]
@@ -17,7 +15,6 @@ class Workspaces(Resource):
     def get(self, jwt_payload, project_id):
         try:
             user_id = get_token_user_id(jwt_payload)
-            print('user_id: ', user_id)
             is_users_project = db.check_project_ownership(user_id, project_id)
             if not is_users_project:
                 raise AuthError({
@@ -53,12 +50,10 @@ class Workspaces(Resource):
 
             user_id = get_token_user_id(jwt_payload)
             req_data = request.get_json()
-            print(req_data)
             name = req_data['name']
             description = req_data['description']
             price = req_data['price']
 
-            print('project_id: ', project_id)
             is_users_project = db.check_project_ownership(user_id, project_id)
             if not is_users_project:
                 raise AuthError({
@@ -66,7 +61,8 @@ class Workspaces(Resource):
                     'description': 'action is not allowed for this user'
                 }, 401)
             new_workspace = db_Workspace(
-                name=name, description=description, price=price, project_id=project_id)
+                name=name, description=description, price=price,
+                project_id=project_id)
             db_Workspace.insert(new_workspace)
 
             workspaces = db.get_all_workspaces_by_project_and_user(

@@ -18,10 +18,7 @@ class Workitem(Resource):
     def get(self, jwt_payload, project_id, workspace_id, workitem_id):
         try:
             user_id = get_token_user_id(jwt_payload)
-            print('work: ', db.get_workitem_by_id_project_id_user_id_and_workspace_id(
-                user_id, project_id, workspace_id, workitem_id))
-            print('workitem: ', workitem_id)
-            workitem = db.get_workitem_by_id_project_id_user_id_and_workspace_id(
+            workitem = db.get_users_workitem(
                 user_id, project_id, workspace_id, workitem_id)
             if not workitem:
                 print(sys.exc_info())
@@ -52,13 +49,9 @@ class Workitem(Resource):
     def patch(self, jwt_payload, project_id, workspace_id, workitem_id):
         try:
             req_data = request.get_json()
-            print('req_data: ', req_data)
-
             user_id = get_token_user_id(jwt_payload)
-            print('work: ', db.get_workitem_by_id_project_id_user_id_and_workspace_id(
-                user_id, project_id, workspace_id, workitem_id))
 
-            workitem = db.get_workitem_by_id_project_id_user_id_and_workspace_id(
+            workitem = db.get_users_workitem(
                 user_id, project_id, workspace_id, workitem_id)
             if not workitem:
                 print(sys.exc_info())
@@ -71,7 +64,7 @@ class Workitem(Resource):
                 workitem.duration = req_data['duration']
 
             workitem.update()
-            updated_workitem = db.get_workitem_by_id_project_id_user_id_and_workspace_id(
+            updated_workitem = db.get_users_workitem(
                 user_id, project_id, workspace_id, workitem_id)
 
             return {

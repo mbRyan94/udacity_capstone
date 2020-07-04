@@ -50,5 +50,5 @@ def check_project_and_workspace_ownership(user_id, project_id, workspace_id):
     return Project.query.filter(and_(Project.user_id == user_id, Project.id == project_id, Workspace.id == workspace_id, Workspace.project_id == project_id)).one_or_none()
 
 
-def get_workitem_by_id_project_id_user_id_and_workspace_id(user_id, project_id, workspace_id, workitem_id):
+def get_users_workitem(user_id, project_id, workspace_id, workitem_id):
     return Workitem.query.filter(and_(project_id == Workspace.project_id, user_id == Project.user_id, Workspace.id == workspace_id, Workitem.workspace_id == workspace_id, Workitem.id == workitem_id)).one_or_none()

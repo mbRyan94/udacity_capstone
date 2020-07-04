@@ -12,13 +12,12 @@ import src.db.query as db
 
 class Projects(Resource):
     method_decorators = [require_auth('get:projects')]
-    # @require_auth('get:projects')
 
     def get(self, jwt_payload):
         projects = []
         try:
             jwt_subject = jwt_payload['sub']
-            print('user_id: ', jwt_subject.split('|')[1])
+
             user_id = jwt_subject.split('|')[1]
 
             projects_from_db = db.get_all_projects_by_user_id(user_id)
@@ -52,19 +51,20 @@ class Projects(Resource):
     def post(self, jwt_payload):
         try:
             req_data = request.get_json()
-            print(req_data)
+
             if not req_data:
                 print(sys.exc_info())
                 abort(400)
             name = req_data['name']
             description = req_data['description']
             start_date = datetime.now().date()
-            print('start_date: ', start_date)
+
             end_date = start_date + timedelta(days=14)
             user_id = get_token_user_id(jwt_payload)
 
             new_project = Project(
-                name=name, description=description, start_date=start_date, end_date=end_date, user_id=user_id)
+                name=name, description=description, start_date=start_date,
+                end_date=end_date, user_id=user_id)
             Project.insert(new_project)
             projects = db.get_all_projects_by_user_id(user_id)
             if not projects:
@@ -76,8 +76,10 @@ class Projects(Resource):
                 res.append({
                     "name": project.name,
                     "description": project.description,
-                    "start_date": json.dumps(project.start_date, indent=4, sort_keys=True, default=str),
-                    "end_date": json.dumps(project.end_date, indent=4, sort_keys=True, default=str),
+                    "start_date": json.dumps(project.start_date, indent=4,
+                                             sort_keys=True, default=str),
+                    "end_date": json.dumps(project.end_date, indent=4,
+                                           sort_keys=True, default=str),
                     "user_id": project.user_id
                 })
 
@@ -85,6 +87,7 @@ class Projects(Resource):
                 "success": True,
                 "projects": res
             }
+
         except AuthError:
             print(sys.exc_info())
             abort(401)

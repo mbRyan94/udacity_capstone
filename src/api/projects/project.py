@@ -2,6 +2,7 @@ from flask import abort, jsonify, request
 from flask_restful import Resource
 import sys
 import datetime
+import werkzeug
 from sqlalchemy.exc import SQLAlchemyError
 
 import src.db.query as db
@@ -14,7 +15,6 @@ class Project(Resource):
 
     def get(self, jwt_payload, project_id):
         try:
-            print('project_id: ', project_id)
             user_id = jwt_payload['sub'].split('|')[1]
 
             project = db.get_project_by_id_and_user(
@@ -26,7 +26,7 @@ class Project(Resource):
             project_workspaces = []
             workspaces = db.get_all_workspaces_by_project_and_user(
                 user_id, project_id)
-            print('workspaces: ', workspaces)
+
             if not workspaces:
                 print(sys.exc_info())
                 abort(404)
@@ -39,7 +39,6 @@ class Project(Resource):
                     "project_id": workspace.project_id
                 })
 
-            print(project.format())
             return jsonify({
                 'success': True,
                 'project': project.format(),
@@ -63,7 +62,7 @@ class Project(Resource):
                 print(sys.exc_info())
                 abort(404)
             delete = project.delete()
-            print(delete)
+
             if not delete:
                 print(sys.exc_info())
             updated_projects = db.get_all_projects_by_user_id(user_id)
@@ -84,6 +83,9 @@ class Project(Resource):
                 'success': True,
                 'projects': res_data
             })
+        except werkzeug.exceptions.NotFound:
+            print(sys.exc_info())
+            abort(404)
         except AuthError:
             print(sys.exc_info())
             abort(401)

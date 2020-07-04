@@ -23,15 +23,13 @@ class Workitems(Resource):
                     'description': 'action is not allowed for this user'
                 }, 401)
             req_data = request.get_json()
-            print(req_data)
             name = req_data['name']
             description = req_data['description']
             duration = req_data['duration']
 
-            print('workspace_id: ', workspace_id)
-
             new_item = db_Workitem(
-                name=name, description=description, duration=duration, workspace_id=workspace_id)
+                name=name, description=description,
+                duration=duration, workspace_id=workspace_id)
 
             db_Workitem.insert(new_item)
             workitems = db.get_all_workitems_by_workspace_id(

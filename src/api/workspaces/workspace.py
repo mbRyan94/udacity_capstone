@@ -20,7 +20,7 @@ class Workspace(Resource):
 
             workspace = db.get_workspace_by_id_project_id_and_user_id(
                 user_id, project_id, workspace_id)
-            print('ws: ', workspace)
+
             if not workspace:
                 print(sys.exc_info())
                 abort(404)
