@@ -5,12 +5,11 @@ import unittest
 import os
 import json
 import sys
+
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask.helpers import url_for
 from dotenv import load_dotenv
-# from models import setup_db, Project, Workspace, Workitem
-# from ..app import create_app
 from importlib.machinery import SourceFileLoader
 from app import create_app
 import src.db.models as db
@@ -77,7 +76,7 @@ class TestCases(unittest.TestCase):
     def test_get_projects_by_user_id(self):
         res = self.client().get('/api/projects', headers={'Authorization': 'Bearer {}'.format(token)})
         data = json.loads(res.data)
-        # print('data: ', data)
+       
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['projects'])
@@ -85,14 +84,14 @@ class TestCases(unittest.TestCase):
     def test_get_projects_by_user_id_without_authorization_headers(self):
         res = self.client().get('/api/projects')
         data = json.loads(res.data)
-        # print('data: ', data)
+        
         self.assertEqual(res.status_code, 401)
 
     def test_post_new_project_success(self):
         res = self.client().post('/api/projects', json=self.new_project , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_project_data: ', data)
+        
         self.assertEqual(res.status_code, 200)
         self.assertTrue(len(data['projects']) != 0)
         self.assertTrue(data['success'])
@@ -101,7 +100,7 @@ class TestCases(unittest.TestCase):
         res = self.client().post('/api/projects/1', json=self.new_project , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_project_data: ', data)
+        
         self.assertEqual(res.status_code, 405)
         self.assertFalse(data['success'])
 
@@ -136,7 +135,7 @@ class TestCases(unittest.TestCase):
     def test_post_project_missing_permission_failure(self):
         res = self.client().post('/api/projects', headers={'Authorization': 'Bearer {}'.format(intern_token)}, json=self.new_project)
         data = json.loads(res.data)
-        # print('test data: ', data, res.status_code)
+        
         self.assertEqual(res.status_code, 401)
         self.assertFalse(data['success'])
 
@@ -168,7 +167,7 @@ class TestCases(unittest.TestCase):
         res = self.client().post('/api/projects/29/workspaces', json=self.new_workspace , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_project_data: ', data)
+        
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['workspaces'])
         self.assertTrue(data['success'])
@@ -177,7 +176,7 @@ class TestCases(unittest.TestCase):
         res = self.client().post('/api/projects/31/workspaces', json=self.new_workspace , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_project_data: ', data)
+        
         self.assertEqual(res.status_code, 401)
         self.assertFalse(data['success'])
 
@@ -215,7 +214,7 @@ class TestCases(unittest.TestCase):
         res = self.client().post('/api/projects/29/workspaces/39/workitems', json=self.new_workitem , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_workspace_data: ', data)
+        
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['workitems'])
         self.assertTrue(data['success'])
@@ -224,7 +223,7 @@ class TestCases(unittest.TestCase):
         res = self.client().post('/api/projects/31/workspaces/41/workitems', json=self.new_workitem , headers={'Authorization': 'Bearer {}'.format(token)})
 
         data = json.loads(res.data)
-        # print('post_new_workitem_data: ', data)
+        
         self.assertEqual(res.status_code, 401)
         self.assertFalse(data['success'])
     
@@ -252,8 +251,7 @@ class TestCases(unittest.TestCase):
     def test_patch_workitem_success(self):
         res = self.client().patch('/api/projects/29/workspaces/35/workitems/17',json=self.patch_workitem, headers={'Authorization': 'Bearer {}'.format(token)})
         data = json.loads(res.data)
-        # print('patch workitem res: ', data)
-        # print(data['workitem']['id'], data['workitem']['name'], data['workitem']['description'])
+        
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertEqual(data['workitem']['id'], 17)
@@ -262,8 +260,7 @@ class TestCases(unittest.TestCase):
     def test_patch_workitem_name_success(self):
         res = self.client().patch('/api/projects/29/workspaces/35/workitems/17',json={"name": "task #1"}, headers={'Authorization': 'Bearer {}'.format(token)})
         data = json.loads(res.data)
-        # print('patch workitem res: ', data)
-        # print(data['workitem']['id'], data['workitem']['name'], data['workitem']['description'])
+        
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertEqual(data['workitem']['id'], 17)
@@ -281,14 +278,14 @@ class TestCases(unittest.TestCase):
     def test_profile(self):
         res = self.client().get('/api/profile', headers={'Authorization': 'Bearer {}'.format(token)})
         data = json.loads(res.data)
-        # print('data: ', data)
+       
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['profile'])
 
     def test_profile_without_role_permission(self):
         res = self.client().get('/api/profile', headers={'Authorization': 'Bearer {}'.format(restricted_permission_token)})
         data = json.loads(res.data)
-        # print('data: ', data)
+        
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['error'], 401)
         self.assertFalse(data['success'])
