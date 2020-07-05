@@ -15,7 +15,7 @@ class Project(Resource):
 
     def get(self, jwt_payload, project_id):
         try:
-            user_id = jwt_payload['sub'].split('|')[1]
+            user_id = get_token_user_id(jwt_payload)
 
             project = db.get_project_by_id_and_user(
                 user_id, project_id)
