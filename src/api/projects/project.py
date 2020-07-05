@@ -66,9 +66,7 @@ class Project(Resource):
             if not delete:
                 print(sys.exc_info())
             updated_projects = db.get_all_projects_by_user_id(user_id)
-            if not updated_projects:
-                print(sys.exc_info())
-                abort(404)
+
             res_data = []
             for project in updated_projects:
                 res_data.append({
