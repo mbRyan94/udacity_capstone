@@ -28,10 +28,6 @@ class Project(Resource):
             workspaces = db.get_all_workspaces_by_project_and_user(
                 user_id, project_id)
 
-            if not workspaces:
-                print(sys.exc_info())
-                abort(404)
-
             for workspace in workspaces:
                 project_workspaces.append({
                     "name": workspace.name,
