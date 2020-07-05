@@ -44,6 +44,9 @@ class Project(Resource):
                 'project': project.format(),
                 'workspaces': project_workspaces
             })
+        except werkzeug.exceptions.NotFound:
+            print(sys.exc_info())
+            abort(404)
         except AuthError:
             print(sys.exc_info())
             abort(401)
