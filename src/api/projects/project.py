@@ -19,6 +19,7 @@ class Project(Resource):
 
             project = db.get_project_by_id_and_user(
                 user_id, project_id)
+
             if not project:
                 print(sys.exc_info())
                 abort(404)
