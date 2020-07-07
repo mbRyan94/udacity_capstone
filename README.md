@@ -50,19 +50,17 @@ from the backend folder run `pip install requirements.txt` to download the depen
 
 From within the backend directory first ensure you are working using your created virtual environment.
 
-To run the application locally, run the the following commands:
+To run the application locally, run the the following command from the root folder of this project:
 
 ```
-export FLASK_APP=app.py
-export FLASK_ENV=development
-python -m flask run
+source setup.sh
 ```
 
-The application is running on `http://localhost:5000/`. All API routes are using the default `http://localhost:5000/api/`.
+Local, the application is running on `http://localhost:5000/`. All API routes are using the default `http://localhost:5000/api/`.
 
 ## Testing
 
-To run the tests, run the following commands from the backend folder:
+To run the tests locally, run the following commands from the backend folder:
 
 ```
 dropdb test_db
