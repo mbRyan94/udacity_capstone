@@ -30,6 +30,7 @@ class Project(Resource):
 
             for workspace in workspaces:
                 project_workspaces.append({
+                    "id": workspace.id,
                     "name": workspace.name,
                     "description": workspace.description,
                     "price": workspace.price,
