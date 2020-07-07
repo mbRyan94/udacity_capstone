@@ -60,7 +60,7 @@ source setup.sh
 
 Local, the application is running on `http://localhost:5000/`. All API routes are using the default `http://localhost:5000/api/`.
 
-## Testing
+## Local Testing
 
 To run the tests locally, run the following commands from the backend folder:
 
@@ -69,6 +69,14 @@ dropdb test_db
 createdb test_db
 psql test_db < init_db.sql
 python -m unittest test.py
+```
+
+## Live Testing - Heroku
+
+You can use the provided **_Postman collection_** which you can find in the root directory to test the API on Heroku.
+
+```
+capstone_project_reviewer_collection.postman_collection.json
 ```
 
 ## Live Server
