@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "23ac2eec-d9d3-4ae4-bba4-074599454a76",
+		"name": "Capstone Project - Reviewer Collection",
+		"description": "Hi, \n\nthx for cheching out my project.\nYou can use this collection to test the API running on heroku. \n\n\nBest,\nMike ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET specific workspace",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM5NjU0MTksImV4cCI6MTU5NDA1MTgxOSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.n380NgslVI9qvWJk8cVCXIb8g9xYAgXGuyuwMvs40m3lP6R8FsANZ32QiunSOVeRZ980hQhxLvy-WXHNZBlm-ZCilU301OI7GyQ1HGQKTcoVUKK8XiSqDIiRim7WM2ztcRKgysaeqE2o6RY-Xkoeklm82ROM56dBTQd4k9UtnpWPu4c7XxJ-N5SCCaw3LZDnMtB3FUdV7yEGLVw7TswYYXUIoFLpOe1mcmXMlMMGFbE2TOspWNizNLRAKLkkfWpGhEd4yFK9tP9Md2b3Q6Oet9DEKjMOD0bFcAXACYFaqOUwOio-pKI5cYoYza-TNvlA0wmzKVPMzcUYiuXGkOWUxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET specific project",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM5NjU0MTksImV4cCI6MTU5NDA1MTgxOSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.n380NgslVI9qvWJk8cVCXIb8g9xYAgXGuyuwMvs40m3lP6R8FsANZ32QiunSOVeRZ980hQhxLvy-WXHNZBlm-ZCilU301OI7GyQ1HGQKTcoVUKK8XiSqDIiRim7WM2ztcRKgysaeqE2o6RY-Xkoeklm82ROM56dBTQd4k9UtnpWPu4c7XxJ-N5SCCaw3LZDnMtB3FUdV7yEGLVw7TswYYXUIoFLpOe1mcmXMlMMGFbE2TOspWNizNLRAKLkkfWpGhEd4yFK9tP9Md2b3Q6Oet9DEKjMOD0bFcAXACYFaqOUwOio-pKI5cYoYza-TNvlA0wmzKVPMzcUYiuXGkOWUxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer thisisatest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/profile",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST add new workitem to workspace",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"review\",\n\t\"description\": \"check docs\",\n\t\"duration\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces",
+						"4",
+						"workitems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH update workitem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"finishing review\",\n\t\"description\": \"some more checks to be made\",\n\t\"duration\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems/3",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces",
+						"4",
+						"workitems",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST add new project",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Udacity Capstone Review\",\n\"description\": \"Review the final project\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET workspacespecific workitems",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM5NjU0MTksImV4cCI6MTU5NDA1MTgxOSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.n380NgslVI9qvWJk8cVCXIb8g9xYAgXGuyuwMvs40m3lP6R8FsANZ32QiunSOVeRZ980hQhxLvy-WXHNZBlm-ZCilU301OI7GyQ1HGQKTcoVUKK8XiSqDIiRim7WM2ztcRKgysaeqE2o6RY-Xkoeklm82ROM56dBTQd4k9UtnpWPu4c7XxJ-N5SCCaw3LZDnMtB3FUdV7yEGLVw7TswYYXUIoFLpOe1mcmXMlMMGFbE2TOspWNizNLRAKLkkfWpGhEd4yFK9tP9Md2b3Q6Oet9DEKjMOD0bFcAXACYFaqOUwOio-pKI5cYoYza-TNvlA0wmzKVPMzcUYiuXGkOWUxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces",
+						"4",
+						"workitems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a projects workspaces",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM5NjU0MTksImV4cCI6MTU5NDA1MTgxOSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.n380NgslVI9qvWJk8cVCXIb8g9xYAgXGuyuwMvs40m3lP6R8FsANZ32QiunSOVeRZ980hQhxLvy-WXHNZBlm-ZCilU301OI7GyQ1HGQKTcoVUKK8XiSqDIiRim7WM2ztcRKgysaeqE2o6RY-Xkoeklm82ROM56dBTQd4k9UtnpWPu4c7XxJ-N5SCCaw3LZDnMtB3FUdV7yEGLVw7TswYYXUIoFLpOe1mcmXMlMMGFbE2TOspWNizNLRAKLkkfWpGhEd4yFK9tP9Md2b3Q6Oet9DEKjMOD0bFcAXACYFaqOUwOio-pKI5cYoYza-TNvlA0wmzKVPMzcUYiuXGkOWUxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a project failure - 404",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTM5NjU0MTksImV4cCI6MTU5NDA1MTgxOSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.n380NgslVI9qvWJk8cVCXIb8g9xYAgXGuyuwMvs40m3lP6R8FsANZ32QiunSOVeRZ980hQhxLvy-WXHNZBlm-ZCilU301OI7GyQ1HGQKTcoVUKK8XiSqDIiRim7WM2ztcRKgysaeqE2o6RY-Xkoeklm82ROM56dBTQd4k9UtnpWPu4c7XxJ-N5SCCaw3LZDnMtB3FUdV7yEGLVw7TswYYXUIoFLpOe1mcmXMlMMGFbE2TOspWNizNLRAKLkkfWpGhEd4yFK9tP9Md2b3Q6Oet9DEKjMOD0bFcAXACYFaqOUwOio-pKI5cYoYza-TNvlA0wmzKVPMzcUYiuXGkOWUxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer thisisatest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a project success",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer thisisatest",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/12",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST add new workspace to project",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"udacity final project review\",\n\"description\": \"code review\",\n\"price\": 2\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces",
+					"protocol": "https",
+					"host": [
+						"heroku-udacity-capstone-test",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"projects",
+						"8",
+						"workspaces"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikhfb1J6RENzMTVoZXV4Ym9pWDd4SCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWUzNDRlMDFmYjhjMzAwMTQ3MTQxM2MiLCJhdWQiOlsiZnJlZXRpbWUiLCJodHRwczovL2ZzbmQyMDIwLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTQxMTA1OTksImV4cCI6MTU5NDE5Njk5OSwiYXpwIjoidk96YW9uanJmZmdQZGE3dUhOUTRxR3FySDRJdkV2aFUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnByb2plY3QiLCJkZWxldGU6d29ya2l0ZW0iLCJnZXQ6cHJvZmlsZSIsImdldDpwcm9qZWN0IiwiZ2V0OnByb2plY3RzIiwiZ2V0OndvcmtpdGVtIiwiZ2V0OndvcmtpdGVtcyIsImdldDp3b3Jrc3BhY2UiLCJnZXQ6d29ya3NwYWNlcyIsIm9wZW5pZDplbWFpbCIsInBhdGNoOnByb2plY3QiLCJwYXRjaDp3b3JraXRlbSIsInBvc3Q6cHJvamVjdHMiLCJwb3N0OndvcmtpdGVtcyIsInBvc3Q6d29ya3NwYWNlcyJdfQ.eIwXoMiLaAteqY3_0JBM3gwll0NE0L9V8YMGVfCk5AdkOviQ1ilKrU9jqEe0dwD9kloEWEm20one3o6SkDNwnzHRTgqVq72wHF6gC4dJrRIVcAm2Cyyi3qOStwP3fYk9NxPpP95u2gHBG55G-jkRLbnC4ZCUeWV_vuvp7mzKC57PDKu9okp4Cfw40lsz9Qm5mH-8QPu0LSUKkXbUr8IFqVlt7Le7Uc9DN9FWncV4osKYTgdPIa8SiQozLSS2lx5AhVADYlNJOma6SRx-Q5424qfDWSo1DeeU0Uv8eH9y8pGWOP1g6oRF6p-4Wg3tPtEDjtM8eIz-FzTjUsAPHFG8Ag",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
