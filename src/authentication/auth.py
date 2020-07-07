@@ -48,7 +48,8 @@ def check_permissions(permission, payload):
     if 'permissions' not in payload:
         raise AuthError({
             'status': 'payload_without_permissions',
-            'description': 'the payload does not have any permission attributes'
+            'description': 'the payload does not have any'
+            'permission attributes'
         }, 401)
 
     if permission not in payload['permissions']:
