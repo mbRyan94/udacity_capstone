@@ -131,7 +131,7 @@ class TestCases(unittest.TestCase):
         self.assertFalse(data['success'])
 
     def test_delete_project_success(self):
-        res = self.client().delete('/api/projects/20',
+        res = self.client().delete('/api/projects/27',
                                    headers={
                                        'Authorization':
                                        'Bearer {}'.format(token)
@@ -313,6 +313,23 @@ class TestCases(unittest.TestCase):
         self.assertFalse(data['success'])
 
     # test workitem routes
+    def test_patching_workitem_success(self):
+        res = self.client().patch(
+            '/api/projects/29/workspaces/35/workitems/17',
+            json={
+                "name": "task #1",
+                "description": "first task to be done"
+            },
+            headers={
+                'Authorization': 'Bearer {}'
+                .format(token)
+            })
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertEqual(data['workitem']['id'], 17)
+
     def test_get_workitem_success(self):
         res = self.client().get('api/projects/29/workspaces/35/workitems/17',
                                 headers={
