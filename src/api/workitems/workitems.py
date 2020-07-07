@@ -77,6 +77,7 @@ class Workitems(Resource):
             for workitem in workitems:
 
                 res_data.append({
+                    "id": workitem.id,
                     "name": workitem.name,
                     "description": workitem.description,
                     "duration": workitem.duration,

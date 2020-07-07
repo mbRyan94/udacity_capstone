@@ -27,6 +27,7 @@ class Workspaces(Resource):
             for workspace in workspaces:
 
                 res.append({
+                    "id": workspace.id,
                     "name": workspace.name,
                     "description": workspace.description,
                     "price": workspace.price,
