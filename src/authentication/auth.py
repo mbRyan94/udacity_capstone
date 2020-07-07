@@ -1,13 +1,14 @@
 import json
+import os
 from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 import sys
 
-AUTH_DOMAIN = 'https://fsnd2020.eu.auth0.com/'
-ALGORITHM = ['RS256']
-API_AUDIENCE = 'freetime'
+AUTH_DOMAIN = os.getenv('AUTH_DOMAIN')
+ALGORITHM = os.getenv('ALGORITHM')
+API_AUDIENCE = os.getenv('API_AUDIENCE')
 
 
 class AuthError(Exception):
