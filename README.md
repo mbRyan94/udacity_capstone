@@ -170,7 +170,7 @@ General:
 
 - Returns all user specific projects:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects -H 'Authorization: Bearer auth_token`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects -H 'Authorization: Bearer <TOKEN>`
 
 ```
 {
@@ -207,7 +207,7 @@ General:
 
 - Add user specific project:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects -H "Content-Type: application/json " -H "Authorization: Bearer auth_token" -X POST -d '{"name": "Client #4","description": "marketing and biz work"}'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects -H "Content-Type: application/json " -H "Authorization: Bearer <TOKEN>" -X POST -d '{"name": "Client #4","description": "marketing and biz work"}'`
 
 ```
 {
@@ -230,7 +230,7 @@ General:
 
 - Returns one user specific project:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6 -H 'Authorization: Bearer auth_token'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6 -H 'Authorization: Bearer <TOKEN>'`
 
 ```
 {
@@ -253,7 +253,7 @@ General:
 
 - Deletes one user specific project:
   Sample:
-  `curl -X DELETE https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6 -H 'Authorization: Bearer auth_token'`
+  `curl -X DELETE https://heroku-udacity-capstone-test.herokuapp.com/api/projects/6 -H 'Authorization: Bearer <TOKEN>'`
 
 ```
 {
@@ -268,7 +268,7 @@ General:
 
 - Returns all user and project specific workspaces:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces -H 'Authorization: Bearer auth_token`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces -H 'Authorization: Bearer <TOKEN>`
 
 ```
 {
@@ -302,7 +302,7 @@ General:
 
 - Add user and project specific workspace:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces -H "Content-Type: application/json " -H "Authorization: Bearer auth_token" -X POST -d '{"name": "Instagram Work", "description": "Insta Stuff", "price": 20}'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces -H "Content-Type: application/json " -H "Authorization: Bearer <TOKEN>" -X POST -d '{"name": "Instagram Work", "description": "Insta Stuff", "price": 20}'`
 
 ```
 {
@@ -330,7 +330,7 @@ General:
 
 - Returns one user and project specific workspace:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4 -H 'Authorization: Bearer auth_token'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4 -H 'Authorization: Bearer <TOKEN>'`
 
 ```
 {
@@ -359,7 +359,7 @@ General:
 
 - Returns all user, project and workspace specific workitems:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems -H 'Authorization: Bearer auth_token`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems -H 'Authorization: Bearer <TOKEN>`
 
 ```
 {
@@ -381,7 +381,7 @@ General:
 
 - Add a user, project and workspace specific workitem:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems -H "Content-Type: application/json " -H "Authorization: Bearer auth_token" -X POST -d '{"name": "task #2", "description": "Create new post", "duration": 1}'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems -H "Content-Type: application/json " -H "Authorization: Bearer <TOKEN>" -X POST -d '{"name": "task #2", "description": "Create new post", "duration": 1}'`
 
 ```
 {
@@ -409,7 +409,7 @@ General:
 
 - Returns a user, project and workspace specific workitem:
   Sample:
-  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems/3 -H 'Authorization: Bearer auth_token'`
+  `curl https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems/3 -H 'Authorization: Bearer <TOKEN>'`
 
 ```
 {
@@ -430,7 +430,7 @@ General:
 
 - Updates a user, project and workspace specific workitem:
   Sample:
-  `curl -X PATCH https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems/3 -H 'Authorization: Bearer auth_token' -d '{"name": "Write capstone docs", "description": "Create the docs for the Udacity capstone project", "duration": 2}'`
+  `curl -X PATCH https://heroku-udacity-capstone-test.herokuapp.com/api/projects/8/workspaces/4/workitems/3 -H 'Authorization: Bearer <TOKEN>' -d '{"name": "Write capstone docs", "description": "Create the docs for the Udacity capstone project", "duration": 2}'`
 
 ```
 {
