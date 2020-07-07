@@ -2,7 +2,7 @@
 
 ## Introduction
 
-I chose to create a time tracking backend for me to keep track of personal projects. I was also curious to build every resource around a specific user.
+I chose to create a time tracking backend for me to keep track of personal projects. I was also curious to build every resource around a specific user and using **flask_restful** as suggested by a reviewer of my last project.
 
 The Freelance API is organized around **REST**. It has **resource-oriented URLs**, returns **JSON-encoded** responses and uses **standard HTTP** response codes.
 
@@ -26,13 +26,15 @@ Developers using this project should already have Python3 and pip installed on t
 
 **Flask** is a lightweight backend microservices framework. Flask is required to handle requests and responses.
 
+**Flask-RESTful** is an extension for Flask that adds support for quickly building REST APIs.
+
 **SQLAlchemy** and **Flask-SQLAlchemy** are libraries to handle the lightweight sqlite database. Since we want you to focus on auth, we handle the heavy lift for you in ./src/database/models.py. We recommend skimming this code first so you know how to interface with the Drink model.
 
 **jose** JavaScript Object Signing and Encryption for JWTs. Useful for encoding, decoding, and verifying JWTS.
 
 ### Database Setup
 
-Create a new database in Postgress:
+Create a new database in Postgres:
 
 ```
 createdb casting_agency
